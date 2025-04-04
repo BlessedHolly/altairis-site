@@ -1,0 +1,97 @@
+@use "../../variables.scss" as v;
+
+.footer {
+  background-color: v.$background-dark-color;
+  height: 298px;
+  border-top: 1px solid #7f7f7feb;
+  color: v.$main-white-color;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: 1200px) {
+    flex-direction: column;
+    height: auto;
+    padding: 2vw 2vw;
+  }
+}
+
+.global-container {
+  font-family: "PlusJakartaSans-regular", sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 39px;
+  border-right: 1px solid rgba(127, 127, 127, 0.9215686275);
+  width: 39.34rem;
+  height: 100%;
+  padding-top: 79px;
+  padding-left: 53px;
+  letter-spacing: 0.9px;
+
+  img {
+    width: 58px;
+  }
+
+  @media (max-width: 1200px) {
+    width: 100%;
+    border-right: none;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+  }
+}
+
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 14.4rem;
+  border-right: 1px solid #7f7f7feb;
+  font-family: v.$plusJakartaSans-medium;
+  font-size: 1.1rem;
+
+  @media (max-width: 1200px) {
+    width: 100%;
+    border-right: none;
+    flex-direction: row;
+    justify-content: center;
+    gap: 3vw;
+  }
+}
+
+.contact {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  @media (max-width: 1200px) {
+    height: auto;
+  }
+}
+
+.contact:last-child {
+  border-top: 1px solid #7f7f7feb;
+
+  @media (max-width: 1200px) {
+    border-top: none;
+    border-left: 1px solid #7f7f7feb;
+    padding-left: 2vw;
+  }
+}
+
+.altairis-email {
+  font-family: v.$afacad;
+  font-size: 4rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 767px) {
+    font-size: 3rem;
+  }
+}

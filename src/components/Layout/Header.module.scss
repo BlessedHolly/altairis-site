@@ -1,0 +1,161 @@
+@use "../../variables.scss" as variables;
+
+.header {
+  position: fixed;
+  width: 100%;
+  z-index: 20;
+}
+
+.navigation {
+  width: max-content;
+  margin-left: auto;
+  margin-right: 4.8vw;
+  margin-top: 47px;
+}
+
+.nav-link {
+  color: variables.$main-white-color;
+  opacity: 0.74;
+  font-family: variables.$plusJakartaSans-medium;
+  font-size: 1.2rem;
+  position: relative;
+
+  &::after {
+    content: "";
+    height: 3px;
+    width: 100%;
+    background-color: rgb(4, 168, 197);
+    position: absolute;
+    top: 29px;
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+
+  &:hover::after {
+    opacity: 0.74;
+  }
+}
+
+.active-navigation {
+  opacity: 1;
+}
+
+.profile-icon {
+  height: 40px;
+  width: 40px;
+}
+
+.profile-link {
+  transition: color 0.15s;
+  position: relative;
+  top: -4px;
+}
+
+.profile-link::after {
+  content: none;
+}
+
+.profile-link:hover {
+  color: rgb(4, 168, 197);
+}
+
+.burger {
+  flex-direction: column;
+  justify-content: space-between;
+  width: 35px;
+  height: 25px;
+  cursor: pointer;
+  margin-left: 350px;
+  display: none;
+
+  span {
+    display: block;
+    height: 4px;
+    width: 100%;
+    background-color: white;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+}
+
+.burger.open span:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.burger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.open span:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+.menu {
+  display: flex;
+  gap: 144px;
+  transition: opacity 0.1s;
+  width: max-content;
+}
+
+@media (max-width: 500px) {
+  .navigation {
+    align-items: flex-end;
+  }
+
+  .burger {
+    display: flex;
+  }
+
+  .menu {
+    opacity: 0;
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    position: absolute;
+    right: 0;
+    top: 100px;
+  }
+
+  .menu.show {
+    display: flex;
+    opacity: 1;
+  }
+
+  .nav-link::after {
+    height: 30px;
+    width: 5px;
+    background-color: rgb(4, 168, 197);
+    top: 0;
+    left: 71px;
+  }
+
+  .profile-link {
+    margin: 0 auto;
+  }
+
+  .profile-link:hover {
+    color: variables.$main-white-color;
+
+    &::after {
+      content: "";
+      height: 100%;
+      width: 5px;
+      background-color: rgb(4, 168, 197);
+      top: 0;
+      left: 56px;
+    }
+  }
+
+  .profile-link {
+    top: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .navigation {
+    margin: 40px auto 0;
+  }
+}

@@ -1,0 +1,205 @@
+@use "../../variables.scss" as v;
+
+.viewport {
+  height: 100vh;
+  overflow: hidden;
+  background-attachment: fixed;
+}
+
+.viewport-1 {
+  background-image: url("/images/viewport_1.png");
+  background-position: center top;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+}
+
+.viewport-2 {
+  @extend .viewport-1;
+  background-image: url("/images/viewport_2.png");
+}
+
+.viewport-3 {
+  height: 2618px;
+  background-color: v.$background-dark-color;
+  color: v.$main-white-color;
+  overflow: hidden;
+}
+
+.viewport-content {
+  margin-left: 7.4vw;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.title-1 {
+  letter-spacing: 0.4px;
+  font-weight: 400;
+  color: v.$main-white-color;
+  font-family: v.$inter-regular;
+  font-size: 1.2rem;
+}
+
+.title-2 {
+  @extend .title-1;
+  font-family: v.$heliosExtC;
+  font-size: 2.8rem;
+}
+
+.paragraph-1 {
+  color: v.$main-white-color;
+  font-family: v.$inter-bold;
+  font-size: 3rem;
+  width: 470px;
+  margin-top: 35px;
+  display: flex;
+  position: relative;
+}
+
+.paragraph-2 {
+  @extend .paragraph-1;
+  font-size: 1rem;
+  font-family: v.$plusJakartaSans-regular;
+  margin-top: 15px;
+  width: 560px;
+  line-height: 30px;
+}
+
+.star-paragraph-1 {
+  align-self: flex-end;
+  margin-bottom: -5px;
+}
+
+.stick-paragraph-1 {
+  position: absolute;
+  top: -75px;
+  left: -4.7vw;
+  color: #56ffeb;
+}
+
+.stick-paragraph-2 {
+  @extend .stick-paragraph-1;
+  top: -85px;
+  right: 610px;
+}
+
+.start-now-button {
+  margin-top: 40px;
+  width: 209px;
+  height: 60px;
+  color: v.$main-white-color;
+  font-family: v.$inter-regular;
+  font-size: 1.125rem;
+  background: linear-gradient(
+    135deg,
+    #56ffeb 0%,
+    #38dbff 0.01%,
+    #579bff 42.5%,
+    #8044ff 100%
+  );
+
+  box-shadow: 0px 0px 10px #56ffeb, 0px 0px 20px #38dbff;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0px 0px 20px #56ffeb, 0px 0px 40px #38dbff;
+    transform: scale(1.02);
+  }
+}
+
+.paragraph-2 {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.roadmap-title {
+  width: max-content;
+  margin: 0 auto;
+  font-family: v.$plusJakartaSans-regular;
+  font-weight: normal;
+  font-size: 1.25rem;
+  text-align: center;
+  margin-top: 143px;
+}
+
+.roadmapWord {
+  font-family: v.$heliosExtC;
+  font-size: 2.8rem;
+  display: block;
+  margin-top: 7px;
+}
+
+.ribbon-altairis {
+  display: flex;
+  font-family: v.$heliosExtC;
+  font-size: 4.5rem;
+  transform: rotate(6.02deg);
+  gap: 30px;
+  margin-top: 220px;
+}
+
+@media (max-width: 768px) {
+  .viewport-content {
+    margin: 0 auto;
+    width: 64vw;
+  }
+
+  .paragraph-1 {
+    width: 450px;
+  }
+
+  .stick-paragraph-1 {
+    left: -64px;
+    top: -10px;
+  }
+
+  .paragraph-2 {
+    width: 350px;
+  }
+
+  .stick-paragraph-2 {
+    right: 360px;
+    top: -288px;
+  }
+
+  .stick-paragraph-2 svg {
+    height: 1060px;
+  }
+
+  .star-paragraph-1 {
+    position: relative;
+    left: -205px;
+  }
+
+  .viewport-3 {
+    height: 2718px;
+  }
+
+  .ribbon-altairis {
+    margin-top: 120px;
+    font-size: 1.8rem;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,59 @@
+$main-white-color: #ffffff;
+$background-dark-color: #090812;
+
+@font-face {
+  font-family: "PlusJakartaSans-medium";
+  src: url("/fonts/PlusJakartaSans/PlusJakartaSansMedium.woff2") format("woff2");
+  font-display: swap;
+}
+
+$plusJakartaSans-medium: "PlusJakartaSans-medium", sans-serif;
+
+@font-face {
+  font-family: "PlusJakartaSans-regular";
+  src: url("/fonts/PlusJakartaSans/PlusJakartaSans-Regular.woff2")
+    format("woff2");
+  font-display: swap;
+}
+
+$plusJakartaSans-regular: "PlusJakartaSans-regular", sans-serif;
+
+@font-face {
+  font-family: "PlusJakartaSans-bold";
+  src: url("/fonts/PlusJakartaSans/PlusJakartaSans-Bold.woff2") format("woff2");
+  font-display: swap;
+}
+
+$plusJakartaSans-bold: "PlusJakartaSans-bold", sans-serif;
+
+@font-face {
+  font-family: "inter-regular";
+  src: url("/fonts/inter/Inter_18pt-Regular.woff2") format("woff2");
+  font-display: swap;
+}
+
+$inter-regular: "inter-regular", sans-serif;
+
+@font-face {
+  font-family: "inter-bold";
+  src: url("/fonts/inter/Inter_18pt-Bold.woff2") format("woff2");
+  font-display: swap;
+}
+
+$inter-bold: "inter-bold", sans-serif;
+
+@font-face {
+  font-family: "HeliosExtC";
+  src: url("/fonts/HeliosExtC/HeliosExtC.woff2") format("woff2");
+  font-display: swap;
+}
+
+$heliosExtC: "HeliosExtC", sans-serif;
+
+@font-face {
+  font-family: "Afacad";
+  src: url("/fonts/afacad/Afacad.woff2") format("woff2");
+  font-display: swap;
+}
+
+$afacad: "Afacad", sans-serif;

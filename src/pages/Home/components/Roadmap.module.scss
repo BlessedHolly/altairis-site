@@ -1,0 +1,138 @@
+@use "../../../variables.scss" as v;
+
+.roadmap-container {
+  display: flex;
+  flex-direction: column;
+  width: 66.3vw;
+  margin: 84px auto 0;
+}
+
+.q-block {
+  list-style: none;
+  padding: 0;
+  padding-block: 70px;
+  position: relative;
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.q-block.visible {
+  animation: fadeInUp 1s ease forwards;
+}
+
+.q-block li {
+  position: relative;
+  padding-left: 35px;
+  font-family: v.$plusJakartaSans-regular;
+  padding-block: 10px;
+}
+
+.q-block li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath opacity='0.6' d='M2 11.9941L12 1.99414L22 11.9941L12 21.9941L2 11.9941Z' stroke='white' stroke-width='0.4'/%3E%3Cpath opacity='0.1' d='M6 11.9941L12 5.99414L18 11.9941L12 17.9941L6 11.9941Z' fill='white'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.q-block li:nth-child(1) {
+  margin-left: 0;
+  padding-left: 0;
+
+  &::before {
+    content: none;
+  }
+}
+
+.q-block:nth-child(even) {
+  align-self: flex-end;
+}
+
+.q-title {
+  font-family: v.$plusJakartaSans-bold;
+  font-size: 1.3rem;
+}
+
+.ambient-light-container-1,
+.ambient-light-container-2,
+.ambient-light-container-3,
+.ambient-light-container-4 {
+  position: absolute;
+}
+
+.ambient-light-container-1 {
+  top: -260px;
+  left: -320px;
+}
+
+.ambient-light-container-2 {
+  right: -180px;
+  left: -290px;
+  top: -300px;
+  z-index: -1;
+}
+
+.ambient-light-container-3 {
+  top: -210px;
+  left: -220px;
+  right: -200px;
+
+  img {
+    height: 760px;
+    width: 790px;
+  }
+}
+
+.ambient-light-container-4 {
+  top: -260px;
+  left: -220px;
+  right: -200px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .star-paragraph-1 {
+    position: relative;
+    left: -205px;
+  }
+
+  .ambient-light-container-1 {
+    right: -180px;
+    left: -290px;
+    top: -130px;
+  }
+
+  .ambient-light-container-2 {
+    right: -180px;
+    left: -290px;
+    top: -200px;
+  }
+
+  .ambient-light-container-3 {
+    left: -140px;
+    top: -100px;
+  }
+
+  .ambient-light-container-4 {
+    top: -230px;
+    left: -220px;
+    right: -260px;
+  }
+}

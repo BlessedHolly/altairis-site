@@ -1,0 +1,121 @@
+@use "../../../../variables.scss" as v;
+
+.more-info-container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0px;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.795);
+  z-index: 20;
+}
+
+.more-info {
+  width: 50%;
+  min-width: 360px;
+  height: 75%;
+  background-color: rgb(53 53 53 / 56%);
+  padding: 5%;
+}
+
+.user-data-container {
+  color: #bbb;
+  font-family: v.$plusJakartaSans-regular;
+}
+
+.username {
+  font-family: v.$plusJakartaSans-bold;
+  color: v.$main-white-color;
+}
+
+.submit-close-changing-container {
+  display: flex;
+  gap: 15px;
+  margin-left: 15px;
+  position: relative;
+  top: 3px;
+}
+
+.change-form {
+  position: relative;
+  max-width: 300px;
+  display: flex;
+}
+
+.submit-change-button,
+.close-changing-button {
+  background: none;
+  border: none;
+}
+
+.close-changing-button,
+.submit-change-button,
+.change-button {
+  color: v.$main-white-color;
+
+  svg {
+    width: 17px;
+  }
+}
+
+.change-button {
+  background: none;
+  border: none;
+}
+
+.email {
+  color: inherit;
+  height: 35px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid v.$main-white-color;
+  margin: 0;
+  width: max-content;
+  max-width: 37.5vw;
+
+  &:disabled {
+    border-bottom: none;
+  }
+}
+
+.status,
+.email-container {
+  margin-top: 5px;
+}
+
+.errorModal {
+  font-family: v.$plusJakartaSans-regular;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(53, 53, 53, 0.808);
+  color: v.$main-white-color;
+  padding: 12px 20px;
+  border-radius: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  z-index: 30;
+
+  &.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  &.hide {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(-20px);
+  }
+}
+
+@media (max-width: 500px) {
+  .email {
+    max-width: 50vw;
+  }
+}

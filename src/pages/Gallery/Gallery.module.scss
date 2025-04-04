@@ -1,0 +1,6 @@
+@use "../../variables.scss" as v;
+
+.gallery-container {
+  background-color: v.$background-dark-color;
+  height: 100vh;
+}

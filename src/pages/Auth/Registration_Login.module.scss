@@ -1,0 +1,112 @@
+@use "../../variables.scss" as v;
+
+.registration-container {
+  background-color: v.$background-dark-color;
+  font-family: v.$inter-regular;
+  color: v.$main-white-color;
+}
+
+.registration-content {
+  margin: 0 auto;
+  width: max-content;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.not-auth-title {
+  margin: 20px 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.registration {
+  width: 300px;
+}
+
+.registration-btn {
+  width: 130px;
+  height: 50px;
+  color: white;
+  background-color: #29273f;
+  margin-top: 10px;
+}
+
+.field-container {
+  height: 55px;
+  position: relative;
+}
+
+.field-container {
+  margin-top: 10px;
+}
+
+.text-input {
+  position: absolute;
+  top: 0px;
+  transition: top 0.1s linear;
+  cursor: text;
+  user-select: none;
+}
+
+.field-container:has(.field:focus) .text-input,
+.field-container:has(.field:not(:placeholder-shown)) .text-input {
+  font-size: 0.7rem;
+  top: -8px;
+}
+
+.field {
+  border: none;
+  padding: 0;
+  border-bottom: 1px solid #b6b6b6;
+  width: 70vw;
+  max-width: 395px;
+  height: 35px;
+  background-color: v.$background-dark-color;
+  color: inherit;
+}
+
+.field:focus {
+  border-color: #646d6d;
+}
+
+input:focus {
+  outline: none;
+}
+
+.other-action {
+  margin-top: 10px;
+  display: flex;
+
+  a {
+    color: rgb(102, 102, 102);
+    margin-left: 3px;
+
+    &:hover {
+      color: rgb(87, 87, 87);
+    }
+  }
+}
+
+.field-container-password {
+  position: relative;
+}
+
+.hide-show-password {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.hide-show-password-button {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.error {
+  color: rgb(173 64 64);
+}

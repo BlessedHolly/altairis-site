@@ -1,0 +1,15 @@
+@use "../../variables.scss" as v;
+
+.loading-container {
+  height: 100vh;
+  background-color: v.$background-dark-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading {
+  color: v.$main-white-color;
+  font-family: v.$inter-regular;
+  font-size: 1.5rem;
+}
