@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const apiAccountSlice = createApi({
   reducerPath: "apiAccount",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://altairis-server.onrender.com/",
+    baseUrl: "https://altairis-server.onrender.com",
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("accessToken");
       if (token) {
@@ -66,10 +66,11 @@ const apiAccountSlice = createApi({
         };
       },
     }),
-    refreshToken: builder.mutation({
-      query: () => ({
-        url: "refresh-token",
-        method: "POST",
+    updateStatus: builder.mutation({
+      query: (status: string) => ({
+        url: "update-status",
+        method: "PATCH",
+        body: { status },
       }),
     }),
   }),
@@ -84,4 +85,5 @@ export const {
   useDeleteAccountMutation,
   useUploadAvatarMutation,
   useUpdateEmailMutation,
+  useUpdateStatusMutation,
 } = apiAccountSlice;

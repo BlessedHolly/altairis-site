@@ -15,7 +15,7 @@
 
 .more-info {
   width: 50%;
-  min-width: 360px;
+  min-width: 260px;
   height: 75%;
   background-color: rgb(53 53 53 / 56%);
   padding: 5%;
@@ -41,7 +41,7 @@
 
 .change-form {
   position: relative;
-  max-width: 300px;
+  // max-width: 300px;
   display: flex;
 }
 
@@ -72,18 +72,47 @@
   background: none;
   border: none;
   border-bottom: 1px solid v.$main-white-color;
-  margin: 0;
   width: max-content;
-  max-width: 37.5vw;
+  max-width: 94%;
 
   &:disabled {
     border-bottom: none;
   }
 }
 
-.status,
-.email-container {
+.status {
+  color: inherit;
+  background: none;
+  margin: 0;
+  border: none;
+  width: 100%;
+  resize: none;
+  overflow: auto;
+  outline: -webkit-focus-ring-color auto 1px;
+
+  &:disabled {
+    border-bottom: none;
+  }
+}
+
+.data-container {
   margin-top: 5px;
+
+  &:last-child {
+    margin-top: 15px;
+
+    .submit-close-changing-container {
+      display: block;
+      margin-left: 15px;
+      position: relative;
+      top: 3px;
+      height: 46vh;
+    }
+
+    .change-form {
+      height: 100%;
+    }
+  }
 }
 
 .errorModal {
@@ -114,8 +143,21 @@
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 1080px) {
   .email {
-    max-width: 50vw;
+    max-width: 86%;
+  }
+}
+
+@media (max-width: 690px) {
+  .email {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 394px) {
+  .submit-close-changing-container {
+    gap: 5px;
+    margin-left: 8px;
   }
 }

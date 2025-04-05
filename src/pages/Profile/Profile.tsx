@@ -112,8 +112,8 @@ function Profile() {
 
           <div className={styles["user-data-container"]}>
             <h2 className={styles["username"]}>{user.name}</h2>
-            <p className={styles["email"]}>{user.email}</p>
-            <p className={styles["status"]}>Crafting the Metaverse.......</p>
+            <p className={styles["email"]}>{user.email.slice(0, 20)}</p>
+            <p className={styles["status"]}>{user.status.slice(0, 20)}...</p>
             <button
               onClick={() => setShowMoreInfo(true)}
               className={`normal-button ${styles["more-button"]}`}
