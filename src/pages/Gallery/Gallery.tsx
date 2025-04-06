@@ -6,14 +6,12 @@ interface some {
   email: string;
   avatar: { type: string; default: "" };
   status: { type: string; default: "" };
-  posts: [
-    {
-      image: string;
-      description: string;
-      date: string;
-      _id: string;
-    }
-  ];
+  posts: {
+    image: string;
+    description: string;
+    date: string;
+    _id: string;
+  }[];
 }
 
 function Gallery() {
@@ -40,25 +38,35 @@ function Gallery() {
   const { data } = useGetUsersQuery(undefined);
   const users: some[] = data?.users;
 
+  const allPosts =
+    users
+      ?.flatMap((user) =>
+        user.posts.map((post) => ({
+          ...post,
+          userName: user.name,
+        }))
+      )
+      .sort(
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+      ) || [];
+
   return (
     <div className={styles["gallery-container"]}>
       <div className={styles["posts"]}>
-        {users?.map((user) =>
-          user.posts.map((post) => (
-            <div className={styles["post"]}>
-              <div className={styles["post-image-container"]}>
-                <img src={post.image} alt="" />
-              </div>
-              <div className={styles["post-info"]}>
-                <div className={styles["text-date-container"]}>
-                  <p className={styles["post-text"]}>{post.description}</p>
-                  <p className={styles["post-date"]}>{formatDate(post.date)}</p>
-                </div>
-                <p className={styles["user-name"]}>{user.name}</p>
-              </div>
+        {allPosts.map((post) => (
+          <div className={styles["post"]} key={post._id}>
+            <div className={styles["post-image-container"]}>
+              <img src={post.image} alt="" />
             </div>
-          ))
-        )}
+            <div className={styles["post-info"]}>
+              <div className={styles["text-date-container"]}>
+                <p className={styles["post-text"]}>{post.description}</p>
+                <p className={styles["post-date"]}>{formatDate(post.date)}</p>
+              </div>
+              <p className={styles["user-name"]}>{post.userName}</p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
