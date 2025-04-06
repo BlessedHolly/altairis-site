@@ -5,14 +5,35 @@ import {
   useGetProfileQuery,
   useUploadAvatarMutation,
 } from "../../store/apiAccountSlice";
-import { useState } from "react";
-import some from "/images/some.png";
-import MoreInfo from "./components/MoreIfo/MoreInfo";
+import { useEffect, useState } from "react";
+import MoreInfo from "./components/MoreIfo/MoreInfo/MoreInfo";
+import CreatingPost from "./components/CreatingPost/CreatingPost";
+import { throttle } from "lodash";
 
 function Profile() {
   const { data, refetch } = useGetProfileQuery(undefined);
   const user = data?.user || {};
   const [uploadAvatar, { isLoading }] = useUploadAvatarMutation();
+
+  function formatDate(dateString: string): string {
+    const date = new Date(dateString);
+
+    const dateOptions: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+
+    const timeOptions: Intl.DateTimeFormatOptions = {
+      hour: "2-digit",
+      minute: "2-digit",
+    };
+
+    const formattedDate = date.toLocaleDateString("en-US", dateOptions);
+    const formattedTime = date.toLocaleTimeString("en-US", timeOptions);
+
+    return `${formattedDate} at ${formattedTime}`;
+  }
 
   const resizeImage = (
     file: File,
@@ -81,6 +102,24 @@ function Profile() {
   };
 
   const [showMoreInfo, setShowMoreInfo] = useState(false);
+  const [showCreating, setShowCreating] = useState(false);
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = throttle(() => {
+      setWindowWidth(window.innerWidth);
+    }, 200);
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      handleResize.cancel();
+    };
+  }, []);
+
+  const [isLoadingPost, setIsLoadingPost] = useState(false);
 
   return (
     <div className={styles["profile-container"]}>
@@ -120,27 +159,65 @@ function Profile() {
             >
               More
             </button>
+            {windowWidth >= 769 ? (
+              <button
+                onClick={() => {
+                  if (!isLoadingPost) setShowCreating(true);
+                }}
+                className={`normal-button ${styles["create-button"]}`}
+                disabled={isLoadingPost}
+              >
+                Create a post
+              </button>
+            ) : null}
           </div>
         </div>
+        {windowWidth < 769 && (
+          <button
+            onClick={() => setShowCreating(true)}
+            className={`normal-button ${styles["create-button"]}`}
+            disabled={isLoadingPost}
+          >
+            Create a post
+          </button>
+        )}
 
-        {/* Посты */}
         <div className={styles["posts"]}>
-          {[...Array(5)].map((_, index) => (
-            <div key={index} className={styles["post"]}>
-              <div className={styles["post-image"]}>
-                <img src={some} alt="" />
-              </div>
-              <p className={styles["post-text"]}>
-                This is the description of the user's post. There may be some
-                text here.
-              </p>
+          {user.posts
+            .map(
+              (post: {
+                image: string;
+                description: string;
+                date: string;
+                _id: string;
+              }) => (
+                <div key={post._id} className={styles["post"]}>
+                  <div className={styles["post-image-container"]}>
+                    <img src={post.image} alt="" />
+                  </div>
+                  <p className={styles["post-text"]}>{post.description}</p>
+                  <p className={styles["post-date"]}>{formatDate(post.date)}</p>
+                </div>
+              )
+            )
+            .reverse()}
+
+          {user.posts.length === 0 ? (
+            <div className={styles["no-post"]}>
+              <p>It's empty here for now.</p>
             </div>
-          ))}
+          ) : null}
         </div>
 
         <MoreInfo
-          changeMoreInfo={() => setShowMoreInfo(false)}
+          closeMoreInfo={() => setShowMoreInfo(false)}
           showMoreInfo={showMoreInfo}
+          refetchProfile={() => refetch()}
+        />
+        <CreatingPost
+          closeCreating={() => setShowCreating(false)}
+          showCreating={showCreating}
+          setIsLoadingPost={(loading: boolean) => setIsLoadingPost(loading)}
           refetchMoreInfo={() => refetch()}
         />
       </div>

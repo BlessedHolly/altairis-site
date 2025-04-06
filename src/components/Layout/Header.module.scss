@@ -167,16 +167,16 @@
 
   .burger {
     justify-content: flex-start;
-    gap: 6px;
+    gap: 5px;
     align-items: flex-end;
 
     span {
-      width: 90%;
-      height: 3px;
+      width: 75%;
+      height: 2px;
     }
 
     &.open span:nth-child(1) {
-      transform: translateY(8px) rotate(46deg);
+      transform: translateY(4px) rotate(46deg);
     }
   }
 }

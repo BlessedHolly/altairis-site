@@ -1,23 +1,24 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import styles from "./MoreInfo.module.scss";
-import { changeEmailSchema } from "../../../../../validationSchema";
+import { changeEmailSchema } from "../../../../../../validationSchema";
 import {
+  useDeleteAccountMutation,
   useGetProfileQuery,
   useUpdateEmailMutation,
   useUpdateStatusMutation,
-} from "../../../../store/apiAccountSlice";
+} from "../../../../../store/apiAccountSlice";
 import * as Yup from "yup";
 
 interface IMoreInfoProps {
   showMoreInfo: boolean;
-  changeMoreInfo: () => void;
-  refetchMoreInfo: () => void;
+  closeMoreInfo: () => void;
+  refetchProfile: () => void;
 }
 
 function MoreInfo({
   showMoreInfo,
-  changeMoreInfo,
-  refetchMoreInfo,
+  closeMoreInfo,
+  refetchProfile,
 }: IMoreInfoProps) {
   const [isEditingEmail, setIsEditingEmail] = useState(false);
   const [isEditingStatus, setIsEditingStatus] = useState(false);
@@ -30,6 +31,7 @@ function MoreInfo({
   const user = data?.user || {};
   const [email, setEmail] = useState<string>(user.email);
   const [status, setStatus] = useState<string>(user.status);
+  const [deleteAccount, { isSuccess }] = useDeleteAccountMutation();
 
   useEffect(() => {
     if (user.email) {
@@ -57,7 +59,7 @@ function MoreInfo({
       await changeEmailSchema.validate({ email });
       await updateEmail({ email }).unwrap();
       refetch();
-      refetchMoreInfo();
+      refetchProfile();
       setIsEditingEmail(false);
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
@@ -90,7 +92,7 @@ function MoreInfo({
     try {
       await updateStatus(status).unwrap();
       refetch();
-      refetchMoreInfo();
+      refetchProfile();
       setIsEditingStatus(false);
     } catch {
       if (serverErrorStatus) {
@@ -129,6 +131,10 @@ function MoreInfo({
     }
   }, [errorMessage]);
 
+  useEffect(() => {
+    if (isSuccess) location.reload();
+  }, [isSuccess]);
+
   return (
     <>
       <div
@@ -139,13 +145,78 @@ function MoreInfo({
         {errorMessage?.message}
       </div>
       {showMoreInfo ? (
-        <div onClick={changeMoreInfo} className={styles["more-info-container"]}>
+        <div onClick={closeMoreInfo} className={styles["more-info-container"]}>
           <div
             onClick={(e) => e.stopPropagation()}
             className={styles["more-info"]}
           >
             <div className={styles["user-data-container"]}>
-              <h2 className={styles["username"]}>{user.name}</h2>
+              <div className={styles["user-name-buttons-container"]}>
+                <h2 className={styles["username"]}>{user.name}</h2>
+                <div className={styles["delete-logout-container"]}>
+                  <button
+                    className={styles["logout-delete-button"]}
+                    onClick={() => {
+                      const sure = confirm(
+                        "Are you sure you want to log out of your account?"
+                      );
+                      if (sure) {
+                        localStorage.removeItem("accessToken");
+                        localStorage.removeItem("refreshToken");
+                        location.reload();
+                      }
+                    }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                      <polyline points="16 17 21 12 16 7"></polyline>
+                      <line x1="21" x2="9" y1="12" y2="12"></line>
+                    </svg>
+                    <span>LogOut</span>
+                  </button>
+                  <button
+                    className={styles["logout-delete-button"]}
+                    onClick={() => {
+                      const sure = confirm(
+                        "Are you sure you want to delete your account?"
+                      );
+                      if (sure) {
+                        deleteAccount(undefined);
+                      }
+                    }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      version="1.0"
+                      width="12pt"
+                      height="18pt"
+                      viewBox="0 0 512.000000 512.000000"
+                      preserveAspectRatio="xMidYMid meet"
+                    >
+                      <g
+                        transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                        fill="#000000"
+                        stroke="none"
+                      >
+                        <path d="M3117 4465 c-82 -28 -126 -100 -127 -201 0 -82 30 -139 95 -179 l48 -30 707 0 707 0 48 30 c65 40 95 97 95 179 -1 104 -53 182 -138 206 -24 6 -279 10 -717 10 -550 -1 -687 -4 -718 -15z" />
+                        <path d="M1880 4044 c-85 -17 -193 -50 -256 -78 -257 -119 -450 -349 -526 -627 -20 -72 -23 -107 -23 -249 0 -142 4 -176 23 -245 52 -178 136 -319 268 -445 189 -180 401 -264 669 -262 106 0 148 5 229 26 342 89 603 350 692 691 33 126 37 314 10 439 -62 284 -253 530 -513 660 -132 66 -228 88 -398 91 -82 2 -161 1 -175 -1z m316 -445 c129 -40 247 -144 309 -273 189 -397 -146 -834 -581 -755 -183 33 -348 179 -405 358 -25 77 -29 230 -10 301 71 252 298 413 556 393 39 -3 97 -14 131 -24z" />
+                        <path d="M1668 1910 c-567 -42 -888 -187 -1083 -489 -82 -126 -151 -317 -138 -383 19 -102 108 -188 193 -188 97 1 190 78 224 186 87 280 300 400 786 444 147 13 601 13 745 0 450 -41 649 -139 760 -373 25 -52 45 -99 45 -104 0 -20 83 -104 122 -124 140 -71 333 51 315 200 -8 65 -74 223 -131 316 -182 290 -470 441 -956 500 -158 19 -701 28 -882 15z" />
+                      </g>
+                    </svg>
+                    <span>Delete account</span>
+                  </button>
+                </div>
+              </div>
               <div className={styles["data-container"]}>
                 <form
                   className={styles["change-form"]}

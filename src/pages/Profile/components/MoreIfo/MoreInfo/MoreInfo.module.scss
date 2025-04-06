@@ -1,4 +1,4 @@
-@use "../../../../variables.scss" as v;
+@use "../../../../../variables.scss" as v;
 
 .more-info-container {
   position: fixed;
@@ -26,9 +26,36 @@
   font-family: v.$plusJakartaSans-regular;
 }
 
+.user-name-buttons-container {
+  display: flex;
+  justify-content: space-between;
+}
+
 .username {
   font-family: v.$plusJakartaSans-bold;
   color: v.$main-white-color;
+}
+
+.delete-logout-container {
+  display: flex;
+  gap: 11px;
+}
+
+.logout-delete-button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: none;
+  border: none;
+  color: v.$main-white-color;
+
+  &:hover {
+    color: #bbb;
+  }
+
+  svg {
+    width: 25px;
+  }
 }
 
 .submit-close-changing-container {
@@ -147,11 +174,21 @@
   .email {
     max-width: 86%;
   }
+
+  .logout-delete-button {
+    span {
+      display: none;
+    }
+  }
 }
 
 @media (max-width: 690px) {
   .email {
     max-width: 80%;
+  }
+
+  .change-form {
+    justify-content: space-between;
   }
 }
 

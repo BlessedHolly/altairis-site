@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const apiAccountSlice = createApi({
   reducerPath: "apiAccount",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://altairis-server.onrender.com",
+    baseUrl: "http://localhost:5005/",
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("accessToken");
       if (token) {
@@ -31,12 +31,6 @@ const apiAccountSlice = createApi({
         url: "login",
         method: "POST",
         body: user,
-      }),
-    }),
-    logoutProfile: builder.mutation({
-      query: () => ({
-        url: "logout",
-        method: "POST",
       }),
     }),
     deleteAccount: builder.mutation({
@@ -73,6 +67,20 @@ const apiAccountSlice = createApi({
         body: { status },
       }),
     }),
+    createPost: builder.mutation({
+      query: ({ image, description, date }) => {
+        const formData = new FormData();
+        formData.append("image", image);
+        formData.append("description", description);
+        formData.append("date", date);
+
+        return {
+          url: "create-post",
+          method: "POST",
+          body: formData,
+        };
+      },
+    }),
   }),
 });
 
@@ -81,9 +89,9 @@ export const {
   useGetProfileQuery,
   useRegistrationProfileMutation,
   useLoginProfileMutation,
-  useLogoutProfileMutation,
   useDeleteAccountMutation,
   useUploadAvatarMutation,
   useUpdateEmailMutation,
   useUpdateStatusMutation,
+  useCreatePostMutation,
 } = apiAccountSlice;
