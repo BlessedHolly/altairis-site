@@ -1,4 +1,4 @@
-@use "../../../../../variables.scss" as v;
+@use "../../../../variables.scss" as v;
 
 .more-info-container {
   position: fixed;
@@ -38,7 +38,7 @@
 
 .delete-logout-container {
   display: flex;
-  gap: 11px;
+  gap: 3vw;
 }
 
 .logout-delete-button {
@@ -132,7 +132,7 @@
       display: block;
       margin-left: 15px;
       position: relative;
-      top: 3px;
+      top: -8px;
       height: 46vh;
     }
 

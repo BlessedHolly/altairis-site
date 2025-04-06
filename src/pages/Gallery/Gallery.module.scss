@@ -2,5 +2,101 @@
 
 .gallery-container {
   background-color: v.$background-dark-color;
-  height: 100vh;
+  min-height: 100vh;
+  color: v.$main-white-color;
+  padding: 14vh 2vh 50px;
+}
+
+.posts {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+/* Пост */
+.post-info,
+.text-date-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.post-info {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.post,
+.no-post {
+  padding: 6%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.25);
+}
+
+.no-post {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: v.$plusJakartaSans-regular;
+}
+
+.post-image-container {
+  display: flex;
+  justify-content: center;
+
+  img {
+    max-height: 60vh;
+  }
+}
+
+/* Описание поста */
+.post-text,
+.post-date,
+.user-name {
+  font-family: v.$plusJakartaSans-regular;
+}
+
+.post-text {
+  font-size: 1.1rem;
+  word-break: break-word;
+}
+
+.post-date,
+.user-name {
+  font-size: 0.8rem;
+  color: #bbb;
+}
+
+.user-name {
+  align-self: flex-end;
+}
+
+@media (max-width: 768px) {
+  .gallery-container {
+    padding-top: 120px;
+  }
+}
+
+@media (max-width: 500px) {
+  .gallery-container {
+    padding-top: 17px;
+  }
+}
+
+@media (max-width: 394px) {
+  .post-text {
+    font-size: 0.85rem;
+  }
+
+  .post-date,
+  .user-name {
+    font-size: 0.65rem;
+  }
 }

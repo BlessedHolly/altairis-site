@@ -81,6 +81,9 @@ const apiAccountSlice = createApi({
         };
       },
     }),
+    getUsers: builder.query({
+      query: () => "users",
+    }),
   }),
 });
 
@@ -94,4 +97,5 @@ export const {
   useUpdateEmailMutation,
   useUpdateStatusMutation,
   useCreatePostMutation,
+  useGetUsersQuery,
 } = apiAccountSlice;

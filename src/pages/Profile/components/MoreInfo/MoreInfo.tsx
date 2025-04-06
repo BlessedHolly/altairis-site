@@ -1,12 +1,12 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import styles from "./MoreInfo.module.scss";
-import { changeEmailSchema } from "../../../../../../validationSchema";
+import { changeEmailSchema } from "../../../../../validationSchema";
 import {
   useDeleteAccountMutation,
   useGetProfileQuery,
   useUpdateEmailMutation,
   useUpdateStatusMutation,
-} from "../../../../../store/apiAccountSlice";
+} from "../../../../store/apiAccountSlice";
 import * as Yup from "yup";
 
 interface IMoreInfoProps {

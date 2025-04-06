@@ -141,7 +141,7 @@
   justify-content: center;
 
   img {
-    max-height: 70vh;
+    max-height: 60vh;
   }
 }
 
@@ -180,9 +180,6 @@
     margin-inline: auto;
     flex-direction: row;
     width: max-content;
-  }
-
-  .profile-info {
     position: static;
   }
 
@@ -262,6 +259,6 @@
   }
 
   .post-date {
-    font-size: 0.55rem;
+    font-size: 0.65rem;
   }
 }

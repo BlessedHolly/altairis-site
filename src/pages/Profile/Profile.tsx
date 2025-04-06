@@ -6,7 +6,7 @@ import {
   useUploadAvatarMutation,
 } from "../../store/apiAccountSlice";
 import { useEffect, useState } from "react";
-import MoreInfo from "./components/MoreIfo/MoreInfo/MoreInfo";
+import MoreInfo from "./components/MoreInfo/MoreInfo";
 import CreatingPost from "./components/CreatingPost/CreatingPost";
 import { throttle } from "lodash";
 
