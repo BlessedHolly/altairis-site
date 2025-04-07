@@ -25,17 +25,12 @@
 }
 
 // avatar
-
 .avatar-container {
   background-color: rgb(51, 51, 51);
   border-radius: 50%;
   position: relative;
   overflow: hidden;
   box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.25);
-
-  &:hover .upload-button {
-    opacity: 1;
-  }
 }
 
 .avatar {
@@ -43,28 +38,6 @@
   min-width: 170px;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-}
-
-.fileInput {
-  display: none;
-}
-
-.upload-button {
-  width: 100%;
-  height: 25%;
-  background-color: rgba(85, 85, 85, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  bottom: 0;
-  border-radius: 0 0 50% 50%;
-  transition: opacity 0.15s ease;
-  opacity: 0;
-}
-
-.change-avatar-image {
-  width: 30px;
 }
 
 // user-data
@@ -83,13 +56,11 @@
   color: v.$main-white-color;
 }
 
-.status,
-.email {
+.status {
   margin-top: 5px;
 }
 
-.more-button,
-.create-button {
+.more-button {
   background-color: #29273f;
   color: #bbb;
   width: 100%;
@@ -98,21 +69,6 @@
 
   &:hover {
     background-color: #262345;
-  }
-}
-.create-button:disabled {
-  cursor: not-allowed;
-  background-color: #29273f;
-}
-
-.create-button {
-  font-family: "PlusJakartaSans-regular", sans-serif;
-
-  svg {
-    position: relative;
-    left: 6px;
-    width: 15px;
-    top: 4px;
   }
 }
 
@@ -189,12 +145,11 @@
 }
 
 .post-button {
-  border: none;
   border-top: 1px solid;
+  box-sizing: content-box;
   width: 190px;
   height: 50px;
   background: #29273ff5;
-  box-sizing: content-box;
 
   &:hover {
     background-color: rgb(54 52 77 / 96%);
@@ -234,7 +189,7 @@
 
 .post-management-container {
   position: absolute;
-  top: -100px;
+  top: -50px;
   right: -30%;
   width: max-content;
   opacity: 0;
@@ -297,21 +252,12 @@
     min-width: 100px;
   }
 
-  .upload-button {
-    height: 32%;
-  }
-
-  .change-avatar-image {
-    width: 20px;
-  }
-
   .user-data-container {
     font-size: 0.85rem;
     margin-left: 10px;
   }
 
-  .status,
-  .email {
+  .status {
     margin-top: 3px;
   }
 
@@ -324,16 +270,6 @@
 
     &:hover {
       background: none;
-    }
-  }
-
-  .create-button {
-    height: 40px;
-    font-size: 0.9rem;
-
-    svg {
-      width: 13px;
-      top: 5px;
     }
   }
 
@@ -363,11 +299,15 @@
   }
 
   .post-management-container {
-    top: -80px;
+    top: -40px;
   }
 
   .post-button {
     width: 120px;
     height: 40px;
+
+    &:first-child {
+      padding-bottom: 0px;
+    }
   }
 }

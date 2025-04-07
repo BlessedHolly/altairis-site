@@ -20,29 +20,21 @@ function MoreInfo({
   closeMoreInfo,
   refetchProfile,
 }: IMoreInfoProps) {
+  const { data, refetch } = useGetProfileQuery(undefined);
+  const [deleteAccount, { isSuccess }] = useDeleteAccountMutation();
+  const [updateEmail, { error: serverErrorEmail }] = useUpdateEmailMutation();
+  const [updateStatus, { error: serverErrorStatus }] =
+    useUpdateStatusMutation();
   const [isEditingEmail, setIsEditingEmail] = useState(false);
   const [isEditingStatus, setIsEditingStatus] = useState(false);
   const [errorMessage, setErrorMessage] = useState<{ message: string } | null>(
     null
   );
-  const inputEmail = useRef<null | HTMLInputElement>(null);
-  const inputStatus = useRef<null | HTMLTextAreaElement>(null);
-  const { data, refetch } = useGetProfileQuery(undefined);
   const user = data?.user || {};
   const [email, setEmail] = useState<string>(user.email);
   const [status, setStatus] = useState<string>(user.status);
-  const [deleteAccount, { isSuccess }] = useDeleteAccountMutation();
-
-  useEffect(() => {
-    if (user.email) {
-      setEmail(user.email);
-    }
-  }, [user.email]);
-
-  const [updateEmail, { error: serverErrorEmail }] = useUpdateEmailMutation();
-
-  const [updateStatus, { error: serverErrorStatus }] =
-    useUpdateStatusMutation();
+  const inputEmail = useRef<null | HTMLInputElement>(null);
+  const inputStatus = useRef<null | HTMLTextAreaElement>(null);
 
   async function handleSubmitEmail(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -108,6 +100,12 @@ function MoreInfo({
       }
     }
   }
+
+  useEffect(() => {
+    if (user.email) {
+      setEmail(user.email);
+    }
+  }, [user.email]);
 
   useEffect(() => {
     if (isEditingEmail && inputEmail.current) {

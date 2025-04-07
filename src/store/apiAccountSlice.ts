@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const apiAccountSlice = createApi({
   reducerPath: "apiAccount",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://altairis-server.onrender.com/",
+    baseUrl: "https://altairis-server.onrender.com",
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("accessToken");
       if (token) {
@@ -84,6 +84,16 @@ const apiAccountSlice = createApi({
     getUsers: builder.query({
       query: () => "users",
     }),
+    deletePost: builder.mutation({
+      query: (id: string) => ({
+        url: "delete-post",
+        method: "DELETE",
+        body: { id },
+      }),
+    }),
+    getForeignUserProfile: builder.query({
+      query: (id: string) => `user-profile/${id}`,
+    }),
   }),
 });
 
@@ -98,4 +108,6 @@ export const {
   useUpdateStatusMutation,
   useCreatePostMutation,
   useGetUsersQuery,
+  useDeletePostMutation,
+  useGetForeignUserProfileQuery,
 } = apiAccountSlice;

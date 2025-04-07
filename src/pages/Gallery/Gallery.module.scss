@@ -4,7 +4,7 @@
   background-color: v.$background-dark-color;
   min-height: 100vh;
   color: v.$main-white-color;
-  padding: 14vh 2vh 50px;
+  padding: 128px 2vh 50px;
 }
 
 .posts {
@@ -16,7 +16,6 @@
   margin: 0 auto;
 }
 
-/* Пост */
 .post-info,
 .text-date-container {
   display: flex;
@@ -29,22 +28,17 @@
   justify-content: space-between;
 }
 
-.post,
-.no-post {
+.post {
   padding: 6%;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.25);
-}
 
-.no-post {
-  height: 80vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: v.$plusJakartaSans-regular;
+  &:hover .interaction-post-container {
+    opacity: 1;
+  }
 }
 
 .post-image-container {
@@ -59,7 +53,7 @@
 /* Описание поста */
 .post-text,
 .post-date,
-.user-name {
+.post-button {
   font-family: v.$plusJakartaSans-regular;
 }
 
@@ -69,13 +63,70 @@
 }
 
 .post-date,
-.user-name {
+.post-button {
   font-size: 0.8rem;
   color: #bbb;
 }
 
-.user-name {
+.interaction-post-container {
   align-self: flex-end;
+}
+
+.post-button {
+  box-sizing: content-box;
+  border: none;
+  border-top: 1px solid;
+  width: 190px;
+  height: 50px;
+  background: #29273ff5;
+
+  &:hover {
+    background-color: rgb(54 52 77 / 96%);
+  }
+
+  &:first-child {
+    border: none;
+  }
+
+  svg {
+    position: relative;
+    top: 5px;
+    right: -4px;
+  }
+}
+
+.interaction-post-container {
+  opacity: 0;
+  align-self: flex-end;
+}
+
+.icon-wrapper {
+  position: relative;
+
+  &:hover {
+    .post-management-container {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.post-management-container {
+  position: absolute;
+  top: -100px;
+  right: -30%;
+  width: max-content;
+  opacity: 0;
+  pointer-events: none;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  transition: opacity 0.1s;
 }
 
 @media (max-width: 768px) {
@@ -95,8 +146,29 @@
     font-size: 0.85rem;
   }
 
-  .post-date,
-  .user-name {
+  .post-date {
     font-size: 0.65rem;
+  }
+
+  .icon-wrapper {
+    top: 5px;
+
+    svg {
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  .post-management-container {
+    top: -80px;
+  }
+
+  .post-button {
+    width: 120px;
+    height: 40px;
+
+    &:first-child {
+      padding-bottom: 0px;
+    }
   }
 }

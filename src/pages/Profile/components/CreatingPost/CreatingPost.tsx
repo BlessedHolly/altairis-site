@@ -61,11 +61,11 @@ function CreatingPost({
   const slideClass =
     currentSlide === 0
       ? slideDirection === "right"
-        ? styles.slideEnterFromLeft
-        : styles.slideEnterFromRight
+        ? styles["slide-enter-from-left"]
+        : styles["slide-enter-from-right"]
       : slideDirection === "right"
-      ? styles.slideEnterFromLeft
-      : styles.slideEnterFromRight;
+      ? styles["slide-enter-from-left"]
+      : styles["slide-enter-from-right"];
 
   return (
     <>
@@ -85,42 +85,42 @@ function CreatingPost({
             onClick={(e) => e.stopPropagation()}
             className={styles["creating-post"]}
           >
-            <div className={`${styles.slideWrapper} ${slideClass}`}>
+            <div className={`${styles["slide-wrapper"]} ${slideClass}`}>
               {currentSlide === 0 ? (
                 <div className={styles.slide}>
-                  <div className={styles.imageUpload}>
+                  <div className={styles["image-upload"]}>
                     {imagePreview ? (
-                      <div className={styles.previewWrapper}>
+                      <div className={styles["preview-wrapper"]}>
                         <img
                           src={imagePreview}
                           alt="Preview"
-                          className={styles.previewImage}
+                          className={styles["preview-image"]}
                         />
-                        <label className={styles.changeImageLabel}>
+                        <label className={styles["change-image-label"]}>
                           Change Image
                           <input
                             type="file"
                             accept="image/*"
                             onChange={handleFileChange}
-                            className={styles.hiddenFileInput}
+                            className={styles["hidden-file-input"]}
                           />
                         </label>
                       </div>
                     ) : (
-                      <label className={styles.selectImageLabel}>
+                      <label className={styles["select-image-label"]}>
                         <input
                           type="file"
                           accept="image/*"
                           onChange={handleFileChange}
-                          className={styles.hiddenFileInput}
+                          className={styles["hidden-file-input"]}
                         />
                         Click to select an image
                       </label>
                     )}
                   </div>
-                  <div className={styles.navigationButtons}>
+                  <div className={styles["navigation-buttons"]}>
                     <button
-                      className={styles.navButton}
+                      className={styles["nav-button"]}
                       onClick={nextSlide}
                       disabled={!image}
                     >
@@ -134,15 +134,18 @@ function CreatingPost({
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="Write a description..."
-                    className={styles.descriptionInput}
+                    className={styles["description-input"]}
                   />
-                  <div className={styles.navigationButtons}>
-                    <button className={styles.navButton} onClick={prevSlide}>
+                  <div className={styles["navigation-buttons"]}>
+                    <button
+                      className={styles["nav-button"]}
+                      onClick={prevSlide}
+                    >
                       ⬅
                     </button>
                     <button
                       onClick={createPostSend}
-                      className={styles.navButton}
+                      className={styles["nav-button"]}
                       disabled={isLoading}
                     >
                       Send

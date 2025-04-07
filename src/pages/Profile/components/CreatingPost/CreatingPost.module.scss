@@ -30,7 +30,7 @@
   animation: fadeIn 0.3s ease-in-out;
 }
 
-.imageUpload {
+.image-upload {
   flex-grow: 1;
   display: flex;
   align-items: center;
@@ -40,14 +40,14 @@
   font-family: v.$plusJakartaSans-bold;
 }
 
-.previewImage {
+.preview-image {
   max-height: 90%;
   max-width: 100%;
   object-fit: contain;
   border-radius: 10px;
 }
 
-.selectImageLabel {
+.select-image-label {
   background-color: #2d2d2d;
   color: v.$main-white-color;
   padding: 20px;
@@ -58,11 +58,11 @@
   border: 2px dashed #aaa;
 }
 
-.hiddenFileInput {
+.hidden-file-input {
   display: none;
 }
 
-.descriptionInput {
+.description-input {
   width: 90%;
   height: 80%;
   padding: 15px;
@@ -80,13 +80,13 @@
   }
 }
 
-.navigationButtons {
+.navigation-buttons {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 
-.navButton {
+.nav-button {
   background-color: #444;
   color: v.$main-white-color;
   padding: 10px 20px;
@@ -111,18 +111,18 @@
   }
 }
 
-.slideWrapper {
+.slide-wrapper {
   width: 100%;
   height: 100%;
   position: relative;
   transition: transform 0.5s ease;
 }
 
-.slideEnterFromLeft {
+.slide-enter-from-left {
   animation: slideFromLeft 0.4s ease forwards;
 }
 
-.slideEnterFromRight {
+.slide-enter-from-right {
   animation: slideFromRight 0.4s ease forwards;
 }
 
@@ -154,6 +154,28 @@
   }
 }
 
+.preview-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.change-image-label {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #ccc;
+  text-decoration: underline;
+  cursor: pointer;
+  position: relative;
+  font-family: v.$plusJakartaSans-bold;
+}
+
+.changeImageLabel input {
+  display: none;
+}
+
 @keyframes slideFromLeft {
   0% {
     opacity: 0;
@@ -174,28 +196,6 @@
     opacity: 1;
     transform: translateX(0);
   }
-}
-
-.previewWrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
-.changeImageLabel {
-  margin-top: 15px;
-  font-size: 14px;
-  color: #ccc;
-  text-decoration: underline;
-  cursor: pointer;
-  position: relative;
-  font-family: v.$plusJakartaSans-bold;
-}
-
-.changeImageLabel input {
-  display: none;
 }
 
 @keyframes fadeIn {

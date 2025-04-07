@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import styles from "./Header.module.scss";
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  if (location.pathname === "/not-found") return <></>;
 
   return (
     <header className={styles.header}>
