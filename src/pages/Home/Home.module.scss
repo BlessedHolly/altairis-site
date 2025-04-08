@@ -81,12 +81,20 @@
   top: -75px;
   left: -4.7vw;
   color: #56ffeb;
+
+  svg {
+    height: 482px;
+  }
 }
 
 .stick-paragraph-2 {
   @extend .stick-paragraph-1;
   top: -85px;
   right: 610px;
+
+  svg {
+    height: 426px;
+  }
 }
 
 .start-now-button {
@@ -150,49 +158,6 @@
   margin-top: 220px;
 }
 
-@media (max-width: 768px) {
-  .viewport-content {
-    margin: 0 auto;
-    width: 64vw;
-  }
-
-  .paragraph-1 {
-    width: 450px;
-  }
-
-  .stick-paragraph-1 {
-    left: -64px;
-    top: -10px;
-  }
-
-  .paragraph-2 {
-    width: 350px;
-  }
-
-  .stick-paragraph-2 {
-    right: 360px;
-    top: -288px;
-  }
-
-  .stick-paragraph-2 svg {
-    height: 1060px;
-  }
-
-  .star-paragraph-1 {
-    position: relative;
-    left: -205px;
-  }
-
-  .viewport-3 {
-    height: 2718px;
-  }
-
-  .ribbon-altairis {
-    margin-top: 120px;
-    font-size: 1.8rem;
-  }
-}
-
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -201,5 +166,141 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .viewport-content {
+    margin: 0 auto;
+    width: 64vw;
+  }
+
+  .paragraph-1 {
+    width: 300px;
+    font-size: 2.4rem;
+  }
+
+  .stick-paragraph-1 {
+    left: -64px;
+  }
+
+  .title-2 {
+    font-size: 1rem;
+  }
+
+  .paragraph-2 {
+    width: 300px;
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 25.6px;
+  }
+
+  .stick-paragraph-2 {
+    right: 360px;
+    top: -311px;
+  }
+
+  .stick-paragraph-2 svg {
+    height: 1060px;
+  }
+
+  .star-paragraph-1 {
+    position: relative;
+    left: -100px;
+
+    svg {
+      height: 40px;
+    }
+  }
+
+  .viewport-3 {
+    height: max-content;
+    padding-bottom: 100px;
+  }
+
+  .ribbon-altairis {
+    margin-top: 120px;
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 394px) {
+  .viewport-content {
+    width: 69vw;
+  }
+
+  .paragraph-1 {
+    width: 320px;
+    font-size: 2.2rem;
+  }
+
+  .star-paragraph-1 {
+    left: -125px;
+
+    svg {
+      height: 37px;
+    }
+  }
+
+  .start-now-button {
+    width: 170px;
+    height: 45px;
+  }
+
+  .stick-paragraph-1 {
+    left: -48px;
+
+    svg {
+      height: 440px;
+    }
+  }
+
+  .viewport-2 .viewport-content {
+    margin: 0;
+    margin-left: 38px;
+  }
+
+  .paragraph-2 {
+    font-size: 0.8rem;
+    line-height: 20px;
+    width: 220px;
+  }
+
+  .stick-paragraph-2 {
+    top: -37px;
+    left: -40px;
+
+    svg {
+      height: 491px;
+    }
+  }
+
+  .viewport-3 {
+    font-size: 0.9rem;
+    height: max-content;
+    padding-bottom: 40px;
+  }
+
+  .roadmap-title {
+    font-size: 1rem;
+  }
+
+  .roadmapWord {
+    font-size: 2rem;
+  }
+
+  .ribbon-altairis {
+    margin-top: 0px;
+    font-size: 1.15rem;
+    gap: 4px;
+
+    div {
+      position: relative;
+      top: -9px;
+    }
+
+    svg {
+      width: 19px;
+    }
   }
 }

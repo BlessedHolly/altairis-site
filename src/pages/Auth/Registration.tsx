@@ -98,7 +98,7 @@ function Registration() {
                   />
                   <ErrorMessage
                     name="password"
-                    component="div"
+                    component="p"
                     className={styles.error}
                   />
                   <div className={styles["hide-show-password"]}>
@@ -163,7 +163,7 @@ function Registration() {
           </div>
 
           {error && (
-            <p style={{ color: "red" }}>
+            <p className={styles["error"]}>
               {errorMessage ? errorMessage : "Registration error"}
             </p>
           )}

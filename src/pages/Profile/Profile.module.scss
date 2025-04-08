@@ -68,7 +68,6 @@
 }
 
 // user-data
-
 .user-data-container {
   display: flex;
   flex-direction: column;
@@ -131,7 +130,7 @@
 .text-date-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  width: 100%;
 }
 
 .post-info {
@@ -147,6 +146,10 @@
   flex-direction: column;
   gap: 10px;
   box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.25);
+}
+
+.post {
+  position: relative;
 }
 
 .post:hover .interaction-post-container {
@@ -173,13 +176,33 @@
 // description of post
 .post-text,
 .post-date,
-.post-button {
+.post-button,
+.more-description-button {
   font-family: v.$plusJakartaSans-regular;
 }
 
 .post-text {
   font-size: 1.1rem;
   word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.more-description-button {
+  width: max-content;
+  background: none;
+  border: none;
+  color: #bbb;
+  margin: 0 auto;
+
+  & + .date-intersection-container {
+    margin: 0;
+  }
+}
+
+.date-intersection-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
 }
 
 .post-date,
@@ -349,13 +372,15 @@
     font-size: 0.85rem;
   }
 
+  .more-description-button {
+    font-size: 0.8rem;
+  }
+
   .post-date {
     font-size: 0.65rem;
   }
 
   .icon-wrapper {
-    top: 5px;
-
     svg {
       width: 15px;
       height: 15px;
@@ -363,7 +388,7 @@
   }
 
   .post-management-container {
-    top: -80px;
+    top: -90px;
   }
 
   .post-button {

@@ -4,7 +4,7 @@
   background-color: v.$background-dark-color;
   min-height: 100vh;
   color: v.$main-white-color;
-  padding: 128px 2vh 50px;
+  padding: 128px 4vw 50px;
 }
 
 .posts {
@@ -20,7 +20,7 @@
 .text-date-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  width: 100%;
 }
 
 .post-info {
@@ -53,17 +53,39 @@
 /* Описание поста */
 .post-text,
 .post-date,
-.post-button {
+.post-button,
+.page-button,
+.more-description-button {
   font-family: v.$plusJakartaSans-regular;
 }
 
 .post-text {
   font-size: 1.1rem;
   word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.more-description-button {
+  width: max-content;
+  background: none;
+  border: none;
+  color: #bbb;
+  margin: 0 auto;
+
+  & + .date-intersection-container {
+    margin: 0;
+  }
+}
+
+.date-intersection-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
 }
 
 .post-date,
-.post-button {
+.post-button,
+.page-button {
   font-size: 0.8rem;
   color: #bbb;
 }
@@ -129,6 +151,35 @@
   transition: opacity 0.1s;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  align-items: center;
+
+  .page-button {
+    background-color: #29273ff5;
+    border: 1px solid #ccc;
+    height: 30px;
+    width: 30px;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:disabled {
+      background-color: rgba(68, 64, 117, 0.96);
+      cursor: default;
+      font-weight: bold;
+      height: 37px;
+      width: 37px;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: rgb(55 32 85);
+    }
+  }
+}
+
 @media (max-width: 768px) {
   .gallery-container {
     padding-top: 120px;
@@ -146,13 +197,15 @@
     font-size: 0.85rem;
   }
 
+  .more-description-button {
+    font-size: 0.8rem;
+  }
+
   .post-date {
     font-size: 0.65rem;
   }
 
   .icon-wrapper {
-    top: 5px;
-
     svg {
       width: 15px;
       height: 15px;
@@ -160,7 +213,7 @@
   }
 
   .post-management-container {
-    top: -80px;
+    top: -90px;
   }
 
   .post-button {

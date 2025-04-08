@@ -136,3 +136,28 @@
     right: -260px;
   }
 }
+
+@media (max-width: 394px) {
+  .ambient-light-container-1 {
+    right: -310px;
+    left: -400px;
+    top: -150px;
+  }
+
+  .ambient-light-container-2 {
+    right: -210px;
+    left: -240px;
+    top: -60px;
+  }
+
+  .ambient-light-container-3 {
+    left: -300px;
+    top: -127px;
+  }
+
+  .ambient-light-container-4 {
+    top: -115px;
+    left: -216px;
+    right: -312px;
+  }
+}

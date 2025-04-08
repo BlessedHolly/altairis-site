@@ -81,8 +81,8 @@ const apiAccountSlice = createApi({
         };
       },
     }),
-    getUsers: builder.query({
-      query: () => "users",
+    getPosts: builder.query({
+      query: (some) => `/posts?page=${some.page}&limit=${some.limit}`,
     }),
     deletePost: builder.mutation({
       query: (id: string) => ({
@@ -107,7 +107,7 @@ export const {
   useUpdateEmailMutation,
   useUpdateStatusMutation,
   useCreatePostMutation,
-  useGetUsersQuery,
+  useGetPostsQuery,
   useDeletePostMutation,
   useGetForeignUserProfileQuery,
 } = apiAccountSlice;

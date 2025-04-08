@@ -36,12 +36,21 @@
 }
 
 .field-container {
-  height: 55px;
+  margin-top: 10px;
+  height: max-content;
+  min-height: 55px;
+  width: 70vw;
+  max-width: 395px;
   position: relative;
+  min-width: 245px;
 }
 
-.field-container {
-  margin-top: 10px;
+.field:-webkit-autofill {
+  appearance: none;
+  background-color: v.$background-dark-color !important;
+  box-shadow: 0 0 0px 1000px v.$background-dark-color inset !important;
+  transition: background-color 9999s ease-in-out 0s;
+  -webkit-text-fill-color: v.$main-white-color !important;
 }
 
 .text-input {
@@ -60,13 +69,12 @@
 
 .field {
   border: none;
-  padding: 0;
   border-bottom: 1px solid #b6b6b6;
-  width: 70vw;
-  max-width: 395px;
+  width: 100%;
   height: 35px;
   background-color: v.$background-dark-color;
   color: inherit;
+  min-width: 245px;
 }
 
 .field:focus {
@@ -109,4 +117,5 @@ input:focus {
 
 .error {
   color: rgb(173 64 64);
+  max-width: 240px;
 }

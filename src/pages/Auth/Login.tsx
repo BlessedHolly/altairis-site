@@ -152,12 +152,18 @@ function Login() {
             </Link>
           </div>
 
-          {error && <p style={{ color: "red" }}>Failed to login</p>}
+          {error &&
+            !(
+              isFetchBaseQueryError(error) &&
+              typeof error.data === "object" &&
+              error.data !== null &&
+              "message" in error.data
+            ) && <p className={styles["error"]}>Failed to login</p>}
           {isFetchBaseQueryError(error) &&
           typeof error.data === "object" &&
           error.data !== null &&
           "message" in error.data ? (
-            <p style={{ color: "red" }}>
+            <p className={styles["error"]}>
               {(error.data as { message: string }).message}
             </p>
           ) : null}

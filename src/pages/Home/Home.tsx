@@ -1,8 +1,11 @@
 import { useEffect } from "react";
 import styles from "./Home.module.scss";
 import Roadmap from "./components/Roadmap";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const navigate = useNavigate();
+
   useEffect(() => {
     const handleScroll = () => {
       const elements = [
@@ -105,7 +108,10 @@ function Home() {
               </svg>
             </div>
           </div>
-          <button className={`normal-button ${styles["start-now-button"]}`}>
+          <button
+            onClick={() => navigate("profile")}
+            className={`normal-button ${styles["start-now-button"]}`}
+          >
             START NOW
           </button>
         </div>
