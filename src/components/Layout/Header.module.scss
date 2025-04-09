@@ -95,6 +95,20 @@
   width: max-content;
 }
 
+@media (max-width: 768px) {
+  .navigation {
+    margin: 40px 0 0;
+    width: 100%;
+    padding-inline: 8vw;
+  }
+
+  .menu {
+    gap: 0;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
 @media (max-width: 500px) {
   .navigation {
     align-items: flex-end;
@@ -117,6 +131,7 @@
     position: absolute;
     right: 0;
     top: 100px;
+    width: auto;
   }
 
   .menu.show {
@@ -151,12 +166,6 @@
 
   .profile-link {
     top: 0;
-  }
-}
-
-@media (max-width: 768px) {
-  .navigation {
-    margin: 40px auto 0;
   }
 }
 

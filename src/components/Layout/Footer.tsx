@@ -1,7 +1,13 @@
+import { useLocation } from "react-router-dom";
 import styles from "./Footer.module.scss";
 import global from "/images/global.svg";
 
 function Footer() {
+  const { pathname } = useLocation();
+  if (pathname === "/messenger") {
+    return null;
+  }
+
   return (
     <footer className={styles.footer}>
       <div className={styles["global-container"]}>

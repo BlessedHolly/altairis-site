@@ -17,6 +17,7 @@ function PrivateRoute({ children }: IPrivateRouteProps) {
     return <Navigate to={"/registration"} replace state={{ from: pathname }} />;
   }
 
+  localStorage.setItem("userId", data.user.id);
   return <>{children}</>;
 }
 

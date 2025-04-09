@@ -1,11 +1,12 @@
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useGetForeignUserProfileQuery } from "../../store/apiSlice";
 import styles from "./OtherProfile.module.scss";
 import noAvatar from "/images/noavatar.jpg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { formatDate, handleDownload } from "../../utils/utils";
 import Loading from "../../components/Loading/Loading";
 import MoreInfo from "./components/MoreInfo/MoreInfo";
+import { throttle } from "lodash";
 
 interface IPost {
   date: string;
@@ -30,6 +31,8 @@ function OtherProfile() {
   const user: IUser = data?.user;
   const [showMoreInfo, setShowMoreInfo] = useState(false);
   const [showFullText, setShowFullText] = useState(false);
+  const navigate = useNavigate();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const toggleShow = () => {
     setShowFullText((prev) => !prev);
@@ -42,6 +45,19 @@ function OtherProfile() {
       : post.description.slice(0, 160) + (shouldTruncate ? "..." : "");
     return displayedText;
   }
+
+  useEffect(() => {
+    const handleResize = throttle(() => {
+      setWindowWidth(window.innerWidth);
+    }, 200);
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      handleResize.cancel();
+    };
+  }, []);
 
   if (isError) return <Navigate to={"/not-found"} />;
   if (data?.message === "same user") return <Navigate to={"/profile"} />;
@@ -69,8 +85,56 @@ function OtherProfile() {
             >
               More
             </button>
+            {windowWidth >= 769 ? (
+              <button
+                onClick={() => navigate("/messenger", { state: userId })}
+                className={`normal-button ${styles["message-button"]} ${styles["desktop"]}`}
+              >
+                Message
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  version="1.0"
+                  width="512.000000pt"
+                  height="512.000000pt"
+                  viewBox="0 0 512.000000 512.000000"
+                  preserveAspectRatio="xMidYMid meet"
+                >
+                  <g
+                    transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                    fill="#000000"
+                    stroke="none"
+                  >
+                    <path d="M2310 4889 c-350 -29 -704 -127 -1025 -284 -397 -194 -722 -468 -944 -799 -344 -511 -431 -1123 -241 -1688 106 -311 267 -566 515 -813 110 -110 256 -232 354 -296 l24 -15 -216 -259 c-230 -277 -245 -301 -228 -378 12 -49 35 -84 73 -107 70 -42 62 -44 754 151 l649 181 140 -18 c211 -28 627 -26 824 5 1277 198 2173 1133 2128 2221 -15 365 -128 705 -338 1016 -495 736 -1472 1164 -2469 1083z m585 -355 c686 -86 1277 -432 1619 -949 195 -295 289 -657 257 -995 -80 -856 -822 -1534 -1846 -1686 -229 -34 -542 -29 -805 13 l-105 16 -399 -111 c-220 -62 -401 -110 -404 -108 -2 3 36 52 85 110 48 58 96 121 106 138 32 60 16 149 -34 194 -13 12 -67 48 -119 80 -622 382 -965 1002 -900 1629 40 396 222 754 534 1052 398 381 939 603 1551 637 103 6 334 -5 460 -20z" />
+                  </g>
+                </svg>
+              </button>
+            ) : null}
           </div>
         </div>
+        {windowWidth < 769 && (
+          <button
+            onClick={() => navigate("/messenger", { state: userId })}
+            className={`normal-button ${styles["message-button"]}`}
+          >
+            Message
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.0"
+              width="512.000000pt"
+              height="512.000000pt"
+              viewBox="0 0 512.000000 512.000000"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <g
+                transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                fill="#000000"
+                stroke="none"
+              >
+                <path d="M2310 4889 c-350 -29 -704 -127 -1025 -284 -397 -194 -722 -468 -944 -799 -344 -511 -431 -1123 -241 -1688 106 -311 267 -566 515 -813 110 -110 256 -232 354 -296 l24 -15 -216 -259 c-230 -277 -245 -301 -228 -378 12 -49 35 -84 73 -107 70 -42 62 -44 754 151 l649 181 140 -18 c211 -28 627 -26 824 5 1277 198 2173 1133 2128 2221 -15 365 -128 705 -338 1016 -495 736 -1472 1164 -2469 1083z m585 -355 c686 -86 1277 -432 1619 -949 195 -295 289 -657 257 -995 -80 -856 -822 -1534 -1846 -1686 -229 -34 -542 -29 -805 13 l-105 16 -399 -111 c-220 -62 -401 -110 -404 -108 -2 3 36 52 85 110 48 58 96 121 106 138 32 60 16 149 -34 194 -13 12 -67 48 -119 80 -622 382 -965 1002 -900 1629 40 396 222 754 534 1052 398 381 939 603 1551 637 103 6 334 -5 460 -20z" />
+              </g>
+            </svg>
+          </button>
+        )}
 
         <div className={styles["posts"]}>
           {user.posts

@@ -161,6 +161,7 @@ function MoreInfo({
                       if (sure) {
                         localStorage.removeItem("accessToken");
                         localStorage.removeItem("refreshToken");
+                        localStorage.removeItem("userId");
                         location.reload();
                       }
                     }}
@@ -190,6 +191,9 @@ function MoreInfo({
                       );
                       if (sure) {
                         deleteAccount(undefined);
+                        localStorage.removeItem("accessToken");
+                        localStorage.removeItem("refreshToken");
+                        localStorage.removeItem("userId");
                       }
                     }}
                   >

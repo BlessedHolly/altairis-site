@@ -12,6 +12,7 @@ import Registration from "./pages/Auth/Registration";
 import Login from "./pages/Auth/Login";
 import NotFound from "./pages/NotFound/NotFound";
 import OtherProfile from "./pages/OtherProfile/OtherProfile";
+import Messenger from "./pages/Messenger/Messenger";
 
 function AppRoutes() {
   const router = createBrowserRouter([
@@ -30,6 +31,10 @@ function AppRoutes() {
         {
           path: "gallery/:userId",
           element: <OtherProfile />,
+        },
+        {
+          path: "messenger",
+          element: <Messenger />,
         },
         {
           path: "profile",
