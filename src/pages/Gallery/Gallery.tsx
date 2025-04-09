@@ -36,7 +36,7 @@ function Gallery() {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [page]);
   if (isLoading) return <Loading />;
-  const { posts, total } = data;
+  const { posts, total } = data ? data : { posts: [] };
   const totalPages = Math.ceil(total / 10);
 
   return (
