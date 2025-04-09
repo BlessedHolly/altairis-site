@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useState } from "react";
-import { useLoginProfileMutation } from "../../store/apiAccountSlice";
+import { useLoginProfileMutation } from "../../store/apiSlice";
 import { loginSchema } from "../../../validationSchema";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import styles from "./Registration_Login.module.scss";
@@ -25,10 +25,10 @@ function Login() {
         navigate(from || "/", { replace: true });
         location.reload();
       } else {
-        console.error("Ошибка: userId отсутствует в ответе");
+        console.error("Error: userId is missing from response");
       }
     } catch (err) {
-      console.error("Ошибка входа", err);
+      console.error("Login error", err);
     }
   }
 

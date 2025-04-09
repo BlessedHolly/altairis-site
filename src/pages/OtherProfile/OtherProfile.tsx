@@ -1,5 +1,5 @@
 import { Navigate, useParams } from "react-router-dom";
-import { useGetForeignUserProfileQuery } from "../../store/apiAccountSlice";
+import { useGetForeignUserProfileQuery } from "../../store/apiSlice";
 import styles from "./OtherProfile.module.scss";
 import noAvatar from "/images/noavatar.jpg";
 import { useState } from "react";

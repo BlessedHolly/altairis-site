@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading/Loading";
-import { useGetPostsQuery } from "../../store/apiAccountSlice";
+import { useGetPostsQuery } from "../../store/apiSlice";
 import { formatDate, handleDownload } from "../../utils/utils";
 import styles from "./Gallery.module.scss";
 import { useEffect, useState } from "react";

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./CreatingPost.module.scss";
-import { useCreatePostMutation } from "../../../../store/apiAccountSlice";
+import { useCreatePostMutation } from "../../../../store/apiSlice";
 
 interface ICreatingPostProps {
   showCreating: boolean;

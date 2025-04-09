@@ -76,7 +76,7 @@ export const handleDownload = async (post: { image: string }, name: string) => {
 
   const a = document.createElement("a");
   a.href = url;
-  a.download = name;
+  a.download = `ALTAIRIS_${name}`;
   a.click();
 
   URL.revokeObjectURL(url);

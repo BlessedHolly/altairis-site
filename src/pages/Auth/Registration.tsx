@@ -2,9 +2,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import styles from "./Registration_Login.module.scss";
 import { useEffect, useState } from "react";
-import { useRegistrationProfileMutation } from "./../../store/apiAccountSlice";
+import { useRegistrationProfileMutation } from "../../store/apiSlice";
 import { registrationSchema } from "../../../validationSchema";
-// 1A!aaaaa
 
 function Registration() {
   const [showPassword, setShowPassword] = useState(false);

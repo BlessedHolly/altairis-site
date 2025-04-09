@@ -75,7 +75,7 @@ function Roadmap() {
             <p>Enhancing image preview quality</p>
           </li>
           <li>
-            <p>Implementing a dark theme for a better user experience</p>
+            <p>Implementing a light theme for a better user experience</p>
           </li>
         </ul>
         <ul className={styles["q-block"]}>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import Loading from "../../components/Loading/Loading";
-import { useGetProfileQuery } from "../../store/apiAccountSlice";
+import { useGetProfileQuery } from "../../store/apiSlice";
 
 interface IPrivateRouteProps {
   children: React.ReactNode;

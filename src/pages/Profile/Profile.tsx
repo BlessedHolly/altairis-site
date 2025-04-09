@@ -5,7 +5,7 @@ import {
   useDeletePostMutation,
   useGetProfileQuery,
   useUploadAvatarMutation,
-} from "../../store/apiAccountSlice";
+} from "../../store/apiSlice";
 import { useEffect, useState } from "react";
 import MoreInfo from "./components/MoreInfo/MoreInfo";
 import CreatingPost from "./components/CreatingPost/CreatingPost";

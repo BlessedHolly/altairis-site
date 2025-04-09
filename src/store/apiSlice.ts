@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const apiAccountSlice = createApi({
+const apiSlice = createApi({
   reducerPath: "apiAccount",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://altairis-server.onrender.com",
@@ -97,7 +97,7 @@ const apiAccountSlice = createApi({
   }),
 });
 
-export default apiAccountSlice;
+export default apiSlice;
 export const {
   useGetProfileQuery,
   useRegistrationProfileMutation,
@@ -110,4 +110,4 @@ export const {
   useGetPostsQuery,
   useDeletePostMutation,
   useGetForeignUserProfileQuery,
-} = apiAccountSlice;
+} = apiSlice;

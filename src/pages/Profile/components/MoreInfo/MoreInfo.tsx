@@ -6,7 +6,7 @@ import {
   useGetProfileQuery,
   useUpdateEmailMutation,
   useUpdateStatusMutation,
-} from "../../../../store/apiAccountSlice";
+} from "../../../../store/apiSlice";
 import * as Yup from "yup";
 
 interface IMoreInfoProps {
