@@ -25,7 +25,7 @@
 - **Vite**
 - **Cloudinary API** (загрузка изображений)
 
-## 🔧 Зпуск проекта
+## 🔧 Запуск проекта
 
 ```bash
 git clone https://github.com/BlessedHolly/altairis-site
