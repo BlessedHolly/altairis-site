@@ -37,6 +37,8 @@ function Messenger() {
   const [isMobileChatOpen, setIsMobileChatOpen] = useState(false);
   const navigate = useNavigate();
   const { state } = useLocation();
+  const [justSentMessage, setJustSentMessage] = useState(false);
+  const prevChatIdRef = useRef<string | null>(null);
 
   const sortedChats = [...chats].sort((a, b) => {
     const aLastMsg = a.messages[a.messages.length - 1];
@@ -55,6 +57,7 @@ function Messenger() {
     if (!message.trim() || !companion) return;
     try {
       await sendMessage({ userId: companion._id, message }).unwrap();
+      setJustSentMessage(true);
       refetch();
       setMessage("");
     } catch (err) {
@@ -101,10 +104,22 @@ function Messenger() {
   }, [state, windowWidth]);
 
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    const currentChatId = companion?._id;
+
+    if (justSentMessage && prevChatIdRef.current === currentChatId) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      setJustSentMessage(false);
     }
-  }, [currentChat?.messages]);
+
+    prevChatIdRef.current = currentChatId ?? null;
+  }, [currentChat?.messages, justSentMessage, companion]);
+
+  useEffect(() => {
+    const currentChatId = companion?._id;
+    messagesEndRef.current?.scrollIntoView({ behavior: "auto" });
+
+    prevChatIdRef.current = currentChatId ?? null;
+  }, [companion]);
 
   if (isLoading) return <Loading />;
 
