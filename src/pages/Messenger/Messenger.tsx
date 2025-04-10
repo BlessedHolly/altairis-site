@@ -37,7 +37,6 @@ function Messenger() {
   const [isMobileChatOpen, setIsMobileChatOpen] = useState(false);
   const navigate = useNavigate();
   const { state } = useLocation();
-  const [justSentMessage, setJustSentMessage] = useState(false);
   const prevChatIdRef = useRef<string | null>(null);
 
   const sortedChats = [...chats].sort((a, b) => {
@@ -57,7 +56,6 @@ function Messenger() {
     if (!message.trim() || !companion) return;
     try {
       await sendMessage({ userId: companion._id, message }).unwrap();
-      setJustSentMessage(true);
       refetch();
       setMessage("");
     } catch (err) {
@@ -104,15 +102,10 @@ function Messenger() {
   }, [state, windowWidth]);
 
   useEffect(() => {
-    const currentChatId = companion?._id;
-
-    if (justSentMessage && prevChatIdRef.current === currentChatId) {
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-      setJustSentMessage(false);
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
-
-    prevChatIdRef.current = currentChatId ?? null;
-  }, [currentChat?.messages, justSentMessage, companion]);
+  }, [currentChat?.messages]);
 
   useEffect(() => {
     const currentChatId = companion?._id;
