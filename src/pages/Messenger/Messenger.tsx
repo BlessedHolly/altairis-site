@@ -102,6 +102,12 @@ function Messenger() {
   }, [state, windowWidth]);
 
   useEffect(() => {
+    if (windowWidth < 769 && isMobileChatOpen && messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "auto" });
+    }
+  }, [windowWidth, isMobileChatOpen]);
+
+  useEffect(() => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
