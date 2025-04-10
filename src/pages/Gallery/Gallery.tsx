@@ -82,7 +82,7 @@ function Gallery() {
                       </svg>
                       <div className={styles["post-management-container"]}>
                         <button
-                          onClick={() => navigate(`${post.userId}`)}
+                          onClick={() => navigate(`/user/${post.userId}`)}
                           className={styles["post-button"]}
                         >
                           {post.userName}

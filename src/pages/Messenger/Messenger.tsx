@@ -34,6 +34,15 @@ function Messenger() {
   const navigate = useNavigate();
   const { state } = useLocation();
 
+  const sortedChats = [...chats].sort((a, b) => {
+    const aLastMsg = a.messages[a.messages.length - 1];
+    const bLastMsg = b.messages[b.messages.length - 1];
+
+    const aTime = aLastMsg ? new Date(aLastMsg.date).getTime() : 0;
+    const bTime = bLastMsg ? new Date(bLastMsg.date).getTime() : 0;
+    return bTime - aTime;
+  });
+
   const currentChat = chats.find((chat) =>
     chat.participants.some((user) => user._id === companion?._id)
   );
@@ -184,8 +193,8 @@ function Messenger() {
           </section>
         ) : (
           <aside className={styles.sidebar}>
-            {chats.length ? (
-              chats.map((chat, i) => {
+            {sortedChats.length ? (
+              sortedChats.map((chat, i) => {
                 const companionUser = chat.participants.find(
                   (p) => p._id !== data.userId
                 )!;
@@ -215,8 +224,8 @@ function Messenger() {
       ) : (
         <>
           <aside className={styles.sidebar}>
-            {chats.length ? (
-              chats.map((chat, i) => {
+            {sortedChats.length ? (
+              sortedChats.map((chat, i) => {
                 const companionUser = chat.participants.find(
                   (p) => p._id !== data.userId
                 )!;

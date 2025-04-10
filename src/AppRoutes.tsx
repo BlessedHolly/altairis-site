@@ -29,12 +29,16 @@ function AppRoutes() {
           element: <Gallery />,
         },
         {
-          path: "gallery/:userId",
+          path: "user/:userId",
           element: <OtherProfile />,
         },
         {
           path: "messenger",
-          element: <Messenger />,
+          element: (
+            <PrivateRoute>
+              <Messenger />
+            </PrivateRoute>
+          ),
         },
         {
           path: "profile",
