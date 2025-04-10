@@ -58,6 +58,8 @@
   .name-last-message-container {
     margin-left: 10px;
     width: 100%;
+    height: max-content;
+    align-self: center;
   }
 
   img {
@@ -282,5 +284,14 @@
   .last-message,
   .dateSeparator {
     font-size: 0.7rem;
+  }
+
+  .chatPreview {
+    height: 70px;
+
+    img {
+      height: 90%;
+      width: 30%;
+    }
   }
 }
