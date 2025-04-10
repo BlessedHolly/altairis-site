@@ -75,10 +75,15 @@
 
 .last-message {
   font-size: 0.9rem;
-  color: #ccc;
+  color: #909090;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-family: v.$inter-regular;
+}
+
+.name-preview {
+  font-size: 1.15rem;
 }
 
 .active-chat {
@@ -287,12 +292,19 @@
     width: 20px;
   }
 
-  .last-message,
   .dateSeparator {
     font-size: 0.7rem;
   }
 
+  .last-message {
+    font-size: 1rem;
+  }
+
   .chatPreview {
-    height: 60px;
+    height: 80px;
+  }
+
+  .name-preview {
+    font-size: 1.05rem;
   }
 }

@@ -246,7 +246,9 @@ function Messenger() {
                     >
                       <img src={companionUser.avatar || noAvatar} alt="" />
                       <div className={styles["name-last-message-container"]}>
-                        <p>{companionUser?.name}</p>
+                        <p className={styles["name-preview"]}>
+                          {companionUser?.name}
+                        </p>
                         {chat.messages.length > 0 ? (
                           <p className={styles["last-message"]}>
                             {chat.messages[chat.messages.length - 1].text}
@@ -290,7 +292,9 @@ function Messenger() {
                     >
                       <img src={companionUser.avatar || noAvatar} alt="" />
                       <div className={styles["name-last-message-container"]}>
-                        <p>{companionUser?.name}</p>
+                        <p className={styles["name-preview"]}>
+                          {companionUser?.name}
+                        </p>
                         {chat.messages.length > 0 ? (
                           <p className={styles["last-message"]}>
                             {chat.messages[chat.messages.length - 1].text}
