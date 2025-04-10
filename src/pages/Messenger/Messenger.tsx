@@ -239,6 +239,7 @@ function Messenger() {
                 const companionUser = chat.participants.find(
                   (p) => p._id !== data.userId
                 )!;
+                if (!companionUser) return null;
 
                 const isActive = companion?._id === companionUser._id;
 
@@ -288,6 +289,7 @@ function Messenger() {
                 const companionUser = chat.participants.find(
                   (p) => p._id !== data.userId
                 )!;
+                if (!companionUser) return null;
 
                 const isActive = companion?._id === companionUser._id;
 
