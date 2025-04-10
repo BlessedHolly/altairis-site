@@ -25,7 +25,9 @@ interface IChat {
 }
 
 function Messenger() {
-  const { data, isLoading, refetch } = useGetChatsQuery(undefined);
+  const { data, isLoading, refetch } = useGetChatsQuery(undefined, {
+    pollingInterval: 5000,
+  });
   const [sendMessage] = useSendMessageMutation();
   const chats: IChat[] = data?.chats || [];
   const [companion, setCompanionId] = useState<IUser | null>(null);
