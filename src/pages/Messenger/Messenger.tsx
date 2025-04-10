@@ -1,14 +1,16 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading/Loading";
 import { useGetChatsQuery, useSendMessageMutation } from "../../store/apiSlice";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./Messenger.module.scss";
 import { throttle } from "lodash";
+import noAvatar from "/images/noavatar.jpg";
+import { formatDate } from "../../utils/utils";
 
 interface IMessage {
   sender: string;
   text: string;
-  date: Date;
+  date: string;
 }
 
 interface IUser {
@@ -143,18 +145,41 @@ function Messenger() {
               <>
                 <div className={styles.messages}>
                   {currentChat ? (
-                    currentChat.messages.map((msg, idx) => (
-                      <div
-                        key={idx}
-                        className={
-                          msg.sender === data.userId
-                            ? styles.myMessage
-                            : styles.theirMessage
-                        }
-                      >
-                        <p>{msg.text}</p>
-                      </div>
-                    ))
+                    currentChat.messages.map((msg, idx) => {
+                      const currentDate = new Date(msg.date)
+                        .toISOString()
+                        .slice(0, 10);
+                      const prevDate =
+                        idx > 0
+                          ? new Date(currentChat.messages[idx - 1].date)
+                              .toISOString()
+                              .slice(0, 10)
+                          : null;
+
+                      const showDate = idx === 0 || currentDate !== prevDate;
+
+                      return (
+                        <React.Fragment key={idx}>
+                          {showDate && (
+                            <div className={styles.dateSeparator}>
+                              <p>{formatDate(msg.date).split(" at ")[0]}</p>
+                            </div>
+                          )}
+                          <div
+                            className={
+                              msg.sender === data.userId
+                                ? styles.myMessage
+                                : styles.theirMessage
+                            }
+                          >
+                            <p>{msg.text}</p>
+                            <p className={styles["date-message"]}>
+                              {formatDate(msg.date).slice(-8)}
+                            </p>
+                          </div>
+                        </React.Fragment>
+                      );
+                    })
                   ) : (
                     <p className={styles.placeholder}>Start a conversation</p>
                   )}
@@ -203,16 +228,32 @@ function Messenger() {
 
                 return (
                   <div
-                    key={i}
-                    className={`${styles.chatPreview} ${
-                      isActive ? styles["active-chat"] : ""
-                    }`}
                     onClick={() => {
                       setCompanionId(companionUser);
                       setIsMobileChatOpen(true);
                     }}
+                    key={i}
+                    className={`${styles["chat-preview-wrapper"]} ${
+                      isActive ? styles["active-chat"] : ""
+                    }`}
                   >
-                    {companionUser?.name}
+                    <div
+                      className={`${styles.chatPreview} ${
+                        isActive ? styles["active-chat"] : ""
+                      }`}
+                    >
+                      <img src={companionUser.avatar || noAvatar} alt="" />
+                      <div className={styles["name-last-message-container"]}>
+                        <p>{companionUser?.name}</p>
+                        {chat.messages.length > 0 ? (
+                          <p className={styles["last-message"]}>
+                            {chat.messages[chat.messages.length - 1].text}
+                          </p>
+                        ) : (
+                          <p>"No messages yet"</p>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 );
               })
@@ -234,13 +275,29 @@ function Messenger() {
 
                 return (
                   <div
+                    onClick={() => setCompanionId(companionUser)}
                     key={i}
-                    className={`${styles.chatPreview} ${
+                    className={`${styles["chat-preview-wrapper"]} ${
                       isActive ? styles["active-chat"] : ""
                     }`}
-                    onClick={() => setCompanionId(companionUser)}
                   >
-                    {companionUser?.name}
+                    <div
+                      className={`${styles.chatPreview} ${
+                        isActive ? styles["active-chat"] : ""
+                      }`}
+                    >
+                      <img src={companionUser.avatar || noAvatar} alt="" />
+                      <div className={styles["name-last-message-container"]}>
+                        <p>{companionUser?.name}</p>
+                        {chat.messages.length > 0 ? (
+                          <p className={styles["last-message"]}>
+                            {chat.messages[chat.messages.length - 1].text}
+                          </p>
+                        ) : (
+                          <p>"No messages yet"</p>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 );
               })
@@ -253,18 +310,41 @@ function Messenger() {
               <>
                 <div className={styles.messages}>
                   {currentChat ? (
-                    currentChat.messages.map((msg, idx) => (
-                      <div
-                        key={idx}
-                        className={
-                          msg.sender === data.userId
-                            ? styles.myMessage
-                            : styles.theirMessage
-                        }
-                      >
-                        <p>{msg.text}</p>
-                      </div>
-                    ))
+                    currentChat.messages.map((msg, idx) => {
+                      const currentDate = new Date(msg.date)
+                        .toISOString()
+                        .slice(0, 10);
+                      const prevDate =
+                        idx > 0
+                          ? new Date(currentChat.messages[idx - 1].date)
+                              .toISOString()
+                              .slice(0, 10)
+                          : null;
+
+                      const showDate = idx === 0 || currentDate !== prevDate;
+
+                      return (
+                        <React.Fragment key={idx}>
+                          {showDate && (
+                            <div className={styles.dateSeparator}>
+                              <p>{formatDate(msg.date).split(" at ")[0]}</p>
+                            </div>
+                          )}
+                          <div
+                            className={
+                              msg.sender === data.userId
+                                ? styles.myMessage
+                                : styles.theirMessage
+                            }
+                          >
+                            <p>{msg.text}</p>
+                            <p className={styles["date-message"]}>
+                              {formatDate(msg.date).slice(-8)}
+                            </p>
+                          </div>
+                        </React.Fragment>
+                      );
+                    })
                   ) : (
                     <p className={styles.placeholder}>Start a conversation</p>
                   )}

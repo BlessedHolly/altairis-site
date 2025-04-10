@@ -64,7 +64,6 @@
   width: 35px;
   height: 25px;
   cursor: pointer;
-  margin-left: 74vw;
   display: none;
 
   span {
@@ -110,6 +109,11 @@
 }
 
 @media (max-width: 500px) {
+  .header {
+    right: 0;
+    width: max-content;
+  }
+
   .navigation {
     align-items: flex-end;
   }
