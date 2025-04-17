@@ -110,7 +110,7 @@ function CreatingPost({
                       <label className={styles["select-image-label"]}>
                         <input
                           type="file"
-                          accept="image/*"
+                          accept="image/*,video/*"
                           onChange={handleFileChange}
                           className={styles["hidden-file-input"]}
                         />
