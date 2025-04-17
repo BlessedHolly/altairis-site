@@ -31,7 +31,6 @@ function Gallery() {
   const { data, isLoading } = useGetPostsQuery({ page, limit: 10 });
   const navigate = useNavigate();
   const [showFullText, setShowFullText] = useState(false);
-  console.log(data);
 
   const toggleShow = () => {
     setShowFullText((prev) => !prev);
