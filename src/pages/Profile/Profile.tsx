@@ -12,12 +12,22 @@ import CreatingPost from "./components/CreatingPost/CreatingPost";
 import { throttle } from "lodash";
 import { formatDate, handleDownload, resizeImage } from "../../utils/utils";
 
-interface IPost {
+interface IPostOld {
   image: string;
   description: string;
   date: string;
   _id: string;
 }
+
+interface IPostNew {
+  mediaUrl: string;
+  mediaType: "image" | "video";
+  description: string;
+  date: string;
+  _id: string;
+}
+
+type IPost = IPostOld | IPostNew;
 
 function Profile() {
   const { data, refetch } = useGetProfileQuery(undefined);
@@ -174,7 +184,13 @@ function Profile() {
             .map((post: IPost) => (
               <div key={post._id} className={styles["post"]}>
                 <div className={styles["post-image-container"]}>
-                  <img src={post.image} alt="" />
+                  {"image" in post ? (
+                    <img src={post.image} alt="" />
+                  ) : post.mediaType === "video" ? (
+                    <video controls src={post.mediaUrl}></video>
+                  ) : (
+                    <img src={post.mediaUrl} alt="" />
+                  )}
                 </div>
                 <div className={styles["post-info"]}>
                   <div className={styles["text-date-container"]}>

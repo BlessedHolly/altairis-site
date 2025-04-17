@@ -8,12 +8,26 @@ import Loading from "../../components/Loading/Loading";
 import MoreInfo from "./components/MoreInfo/MoreInfo";
 import { throttle } from "lodash";
 
-interface IPost {
-  date: string;
-  description: string;
+interface IPostOld {
   image: string;
+  description: string;
+  date: string;
   _id: string;
+  userName: string;
+  userId: string;
 }
+
+interface IPostNew {
+  mediaUrl: string;
+  mediaType: "image" | "video";
+  description: string;
+  date: string;
+  _id: string;
+  userName: string;
+  userId: string;
+}
+
+type IPost = IPostOld | IPostNew;
 
 interface IUser {
   avatar: string;
@@ -141,7 +155,13 @@ function OtherProfile() {
             .map((post: IPost) => (
               <div key={post._id} className={styles["post"]}>
                 <div className={styles["post-image-container"]}>
-                  <img src={post.image} alt="" />
+                  {"image" in post ? (
+                    <img src={post.image} alt="" />
+                  ) : post.mediaType === "video" ? (
+                    <video controls src={post.mediaUrl}></video>
+                  ) : (
+                    <img src={post.mediaUrl} alt="" />
+                  )}
                 </div>
                 <div className={styles["post-info"]}>
                   <div className={styles["text-date-container"]}>

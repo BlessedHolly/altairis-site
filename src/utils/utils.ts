@@ -69,8 +69,25 @@ export const resizeImage = (
   });
 };
 
-export const handleDownload = async (post: { image: string }, name: string) => {
-  const response = await fetch(post.image);
+interface IPostOld {
+  image: string;
+  description: string;
+  date: string;
+  _id: string;
+}
+
+interface IPostNew {
+  mediaUrl: string;
+  mediaType: "image" | "video";
+  description: string;
+  date: string;
+  _id: string;
+}
+
+type IPost = IPostOld | IPostNew;
+
+export const handleDownload = async (post: IPost, name: string) => {
+  const response = await fetch("image" in post ? post.image : post.mediaUrl);
   const blob = await response.blob();
   const url = URL.createObjectURL(blob);
 

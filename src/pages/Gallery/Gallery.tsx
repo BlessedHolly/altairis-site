@@ -5,20 +5,33 @@ import { formatDate, handleDownload } from "../../utils/utils";
 import styles from "./Gallery.module.scss";
 import { useEffect, useState } from "react";
 
-interface IPost {
-  date: string;
-  description: string;
+interface IPostOld {
   image: string;
-  userId: string;
-  userName: string;
+  description: string;
+  date: string;
   _id: string;
+  userName: string;
+  userId: string;
 }
+
+interface IPostNew {
+  mediaUrl: string;
+  mediaType: "image" | "video";
+  description: string;
+  date: string;
+  _id: string;
+  userName: string;
+  userId: string;
+}
+
+type IPost = IPostOld | IPostNew;
 
 function Gallery() {
   const [page, setPage] = useState(1);
   const { data, isLoading } = useGetPostsQuery({ page, limit: 10 });
   const navigate = useNavigate();
   const [showFullText, setShowFullText] = useState(false);
+  console.log(data);
 
   const toggleShow = () => {
     setShowFullText((prev) => !prev);
@@ -45,7 +58,13 @@ function Gallery() {
         {posts.map((post: IPost) => (
           <div className={styles["post"]} key={post._id}>
             <div className={styles["post-image-container"]}>
-              <img src={post.image} alt="" />
+              {"image" in post ? (
+                <img src={post.image} alt="" />
+              ) : post.mediaType === "video" ? (
+                <video controls src={post.mediaUrl}></video>
+              ) : (
+                <img src={post.mediaUrl} alt="" />
+              )}
             </div>
             <div className={styles["post-info"]}>
               <div className={styles["text-date-container"]}>

@@ -70,7 +70,7 @@ const apiSlice = createApi({
     createPost: builder.mutation({
       query: ({ image, description, date }) => {
         const formData = new FormData();
-        formData.append("image", image);
+        formData.append("media", image);
         formData.append("description", description);
         formData.append("date", date);
 
@@ -82,7 +82,7 @@ const apiSlice = createApi({
       },
     }),
     getPosts: builder.query({
-      query: (some) => `/posts?page=${some.page}&limit=${some.limit}`,
+      query: (all) => `/posts?page=${all.page}&limit=${all.limit}`,
     }),
     deletePost: builder.mutation({
       query: (id: string) => ({

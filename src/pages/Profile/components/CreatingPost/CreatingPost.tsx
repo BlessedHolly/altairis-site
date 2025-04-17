@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+// src/components/CreatingPost/CreatingPost.tsx
+import React, { useEffect, useState } from "react";
 import styles from "./CreatingPost.module.scss";
 import { useCreatePostMutation } from "../../../../store/apiSlice";
 
@@ -19,15 +20,53 @@ function CreatingPost({
   const [slideDirection, setSlideDirection] = useState<"left" | "right">(
     "right"
   );
-  const [image, setImage] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [mediaFile, setMediaFile] = useState<File | null>(null);
+  const [mediaPreview, setMediaPreview] = useState<string | null>(null);
   const [description, setDescription] = useState("");
 
+  const [createPost, { isSuccess, isLoading, reset }] = useCreatePostMutation();
+
+  useEffect(() => {
+    if (isSuccess) {
+      refetchMoreInfo();
+      setIsLoadingPost(false);
+      reset();
+    }
+  }, [isSuccess, refetchMoreInfo, setIsLoadingPost, reset]);
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setImage(file);
-      setImagePreview(URL.createObjectURL(file));
+    const file = e.target.files?.[0] ?? null;
+    setMediaFile(file);
+    if (!file) {
+      setMediaPreview(null);
+      return;
+    }
+
+    const url = URL.createObjectURL(file);
+
+    if (file.type.startsWith("video/")) {
+      const video = document.createElement("video");
+      video.preload = "metadata";
+      video.src = url;
+      video.muted = true;
+      video.playsInline = true;
+
+      video.addEventListener("loadeddata", () => {
+        video.currentTime = 0.5;
+      });
+      video.addEventListener("seeked", () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        const ctx = canvas.getContext("2d");
+        if (ctx) {
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+          setMediaPreview(canvas.toDataURL("image/png"));
+        }
+        URL.revokeObjectURL(url);
+      });
+    } else {
+      setMediaPreview(url);
     }
   };
 
@@ -41,22 +80,11 @@ function CreatingPost({
     setCurrentSlide((prev) => Math.max(prev - 1, 0));
   };
 
-  const [createPost, { isSuccess, isLoading, reset }] = useCreatePostMutation();
-
-  useEffect(() => {
-    if (isSuccess) {
-      refetchMoreInfo();
-      setIsLoadingPost(false);
-      reset();
-    }
-  }, [isSuccess, refetchMoreInfo, setIsLoadingPost, reset]);
-
-  function createPostSend() {
-    const date = new Date();
-    createPost({ image, description, date });
+  const createPostSend = () => {
+    createPost({ image: mediaFile, description, date: new Date() });
     closeCreating();
     setIsLoadingPost(true);
-  }
+  };
 
   const slideClass =
     currentSlide === 0
@@ -76,6 +104,7 @@ function CreatingPost({
       >
         Post is loading
       </div>
+
       {showCreating && !isLoading && (
         <div
           onClick={closeCreating}
@@ -89,18 +118,27 @@ function CreatingPost({
               {currentSlide === 0 ? (
                 <div className={styles.slide}>
                   <div className={styles["image-upload"]}>
-                    {imagePreview ? (
+                    {mediaPreview ? (
                       <div className={styles["preview-wrapper"]}>
-                        <img
-                          src={imagePreview}
-                          alt="Preview"
-                          className={styles["preview-image"]}
-                        />
+                        {mediaFile?.type.startsWith("video/") ? (
+                          <video
+                            src={URL.createObjectURL(mediaFile)}
+                            className={styles["preview-image"]}
+                            controls
+                          />
+                        ) : (
+                          <img
+                            src={mediaPreview!}
+                            alt="Preview"
+                            className={styles["preview-image"]}
+                          />
+                        )}
+
                         <label className={styles["change-image-label"]}>
                           Change Image
                           <input
                             type="file"
-                            accept="image/*"
+                            accept="image/*,video/*"
                             onChange={handleFileChange}
                             className={styles["hidden-file-input"]}
                           />
@@ -114,7 +152,7 @@ function CreatingPost({
                           onChange={handleFileChange}
                           className={styles["hidden-file-input"]}
                         />
-                        Click to select an image
+                        Click to select an image or video
                       </label>
                     )}
                   </div>
@@ -122,7 +160,7 @@ function CreatingPost({
                     <button
                       className={styles["nav-button"]}
                       onClick={nextSlide}
-                      disabled={!image}
+                      disabled={!mediaFile}
                     >
                       ➡
                     </button>
