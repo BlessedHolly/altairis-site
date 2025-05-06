@@ -28,7 +28,7 @@ type IPost = IPostOld | IPostNew;
 
 function Gallery() {
   const [page, setPage] = useState(1);
-  const { data, isLoading } = useGetPostsQuery({ page, limit: 10 });
+  const { data, isLoading } = useGetPostsQuery({ page, limit: 20 });
   const navigate = useNavigate();
   const [showFullText, setShowFullText] = useState(false);
 
@@ -49,7 +49,7 @@ function Gallery() {
   }, [page]);
   if (isLoading) return <Loading />;
   const { posts, total } = data ? data : { posts: [] };
-  const totalPages = Math.ceil(total / 10);
+  const totalPages = Math.ceil(total / 20);
 
   return (
     <div className={styles["gallery-container"]}>
