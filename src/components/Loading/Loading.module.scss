@@ -6,10 +6,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 .loading {
   color: v.$main-white-color;
   font-family: v.$inter-regular;
   font-size: 1.5rem;
+  text-align: center;
 }
